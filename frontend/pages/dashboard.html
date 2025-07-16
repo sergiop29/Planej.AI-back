@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel | Planej.AI</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" href="../img/favicon.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="../img/logo.png" alt="Planej.AI Logo">
+                <h1>Planej.AI</h1>
+            </div>
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav class="nav-links">
+                <a href="dashboard.html" class="active">Painel</a>
+                <a href="financial-data.html">Dados</a>
+                <a href="agent-chat.html">Agente</a>
+            </nav>
+            <div class="user-actions">
+                <div class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </div>
+                <div class="user-profile">
+                    <img src="../img/avatar.png" alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%;">
+                    <span>Olá, Sergio</span>
+                    <i class="fas fa-chevron-down" style="font-size: 0.8rem; margin-left: 5px;"></i>
+                    
+                    <!-- Dropdown Menu -->
+                    <div class="profile-dropdown">
+                        <ul>
+                            <li><a href="profile.html"><i class="fas fa-user"></i> Meu Perfil</a></li>
+                            <li><a href="settings.html"><i class="fas fa-cog"></i> Configurações</a></li>
+                            <li><a href="subscription.html"><i class="fas fa-credit-card"></i> Assinatura</a></li>
+                            <li><a href="help.html"><i class="fas fa-question-circle"></i> Ajuda</a></li>
+                            <li><a href="../index.html"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Dashboard Section -->
+    <section class="dashboard">
+        <div class="container">
+            <div class="dashboard-header">
+                <div class="dashboard-title">
+                    <h2>Painel Financeiro</h2>
+                    <p>Visão geral da saúde financeira do seu negócio</p>
+                </div>
+                <div class="dashboard-actions">
+                    <button class="btn btn-primary" onclick="exportToPDF()"><i class="fas fa-file-pdf"></i> Exportar Relatório</button>
+                </div>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <h3>Receita Mensal</h3>
+                        <div class="stat-icon" style="background-color: rgba(74, 71, 163, 0.1); color: var(--primary-color);">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value" id="dashboard-receita">R$ --</div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i> 12% vs. mês anterior
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <h3>Gastos</h3>
+                        <div class="stat-icon" style="background-color: rgba(74, 71, 163, 0.1); color: var(--accent-color);">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value" id="dashboard-gastos">R$ --</div>
+                    <div class="stat-change negative">
+                        <i class="fas fa-arrow-down"></i> 8% vs. mês anterior
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <h3>Lucro Líquido</h3>
+                        <div class="stat-icon" style="background-color: rgba(74, 71, 163, 0.1); color: var(--blue-color);">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value" id="dashboard-lucro">R$ --</div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i> 5% vs. mês anterior
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <h3>Margem de Lucro</h3>
+                        <div class="stat-icon" style="background-color: rgba(74, 71, 163, 0.1); color: var(--secondary-color);">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value" id="dashboard-margem">--%</div>
+                    <div class="stat-change positive">
+                        <i class="fas fa-arrow-up"></i> 3% vs. mês anterior
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Row -->
+            <div style="display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 18px; align-items: stretch;">
+                <div class="card" style="flex: 2; min-width: 300px; margin-bottom: 0;">
+                    <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+                        <div class="card-title">Receitas vs Despesas</div>
+                        <div class="card-actions">
+                            <select id="ano-grafico" class="form-control" style="padding: 5px 10px; font-size: 0.9rem; min-width: 90px;">
+                                <option value="2025">2025</option>
+                                <option value="2024">2024</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container" style="width: 100%; height: 420px; min-width: 0;">
+                            <canvas id="revenueChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card" style="flex: 1; min-width: 300px; margin-bottom: 0;">
+                    <div class="card-header">
+                        <div class="card-title">Distribuição de Despesas</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container" style="width: 100%; height: 350px;">
+                            <canvas id="expenseCategoryChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cash Flow and Forecast -->
+            <div style="display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 18px; align-items: stretch;">
+                <div class="card" style="flex: 1; min-width: 300px; margin-bottom: 0;">
+                    <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+                        <div class="card-title">Fluxo de Caixa</div>
+                        <div class="card-actions">
+                            <select id="ano-fluxo-dashboard" class="form-control" style="padding: 5px 10px; font-size: 0.9rem; min-width: 90px;">
+                                <option value="2025">2025</option>
+                                <option value="2024">2024</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container" style="width: 100%; height: 420px;">
+                            <canvas id="cashFlowChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <!-- Forecast permanece igual -->
+                <div class="card" style="flex: 1; min-width: 300px; margin-bottom: 0;">
+                    <div class="card-header">
+                        <div class="card-title">Previsão Financeira</div>
+                        <div class="card-actions">
+                            <button class="btn btn-sm btn-outline">Detalhes</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="forecastChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Transactions -->
+            <!-- Seção removida -->
+
+            <!-- Agent Section -->
+            <div class="agent-section">
+                <div class="agent-header">
+                    <div class="agent-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="agent-info">
+                        <h3>Assistente Financeiro IA</h3>
+                        <p>Recomendações personalizadas baseadas nos seus dados</p>
+                    </div>
+                </div>
+                <div class="agent-message">
+                    <p id="agentResponse">Olá Sergio! Analisando seus dados financeiros, percebi que suas despesas com marketing aumentaram 18% nos últimos 3 meses, mas não houve um aumento proporcional nas vendas. Recomendo revisar sua estratégia de marketing para otimizar o retorno sobre investimento.</p>
+                </div>
+                <div class="agent-actions">
+                    <a href="agent-chat.html" class="btn btn-primary">Conversar com o Agente</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Edit Transaction Modal -->
+    <div class="modal" id="editTransactionModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Editar Transação</div>
+                <div class="modal-close">&times;</div>
+            </div>
+            <div class="modal-body">
+                <form id="editTransactionForm">
+                    <div class="form-group">
+                        <label for="transactionDescription">Descrição</label>
+                        <input type="text" id="transactionDescription" class="form-control" value="Pagamento de Fornecedor XYZ">
+                    </div>
+                    <div class="form-group">
+                        <label for="transactionCategory">Categoria</label>
+                        <select id="transactionCategory" class="form-control">
+                            <option>Fornecedores</option>
+                            <option>Vendas</option>
+                            <option>Despesas Fixas</option>
+                            <option>Folha de Pagamento</option>
+                            <option>Marketing</option>
+                            <option>Investimentos</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="transactionDate">Data</label>
+                        <input type="date" id="transactionDate" class="form-control" value="2025-04-25">
+                    </div>
+                    <div class="form-group">
+                        <label for="transactionAmount">Valor</label>
+                        <input type="number" id="transactionAmount" class="form-control" value="5400">
+                    </div>
+                    <div class="form-group">
+                        <label for="transactionStatus">Status</label>
+                        <select id="transactionStatus" class="form-control">
+                            <option>Pendente</option>
+                            <option selected>Concluído</option>
+                            <option>Cancelado</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="transactionNotes">Observações</label>
+                        <textarea id="transactionNotes" class="form-control" rows="3">Pagamento referente à compra de matéria-prima para produção de abril.</textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline modal-close">Cancelar</button>
+                <button class="btn btn-primary">Salvar Alterações</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+async function carregarDashboardIndicadores() {
+    try {
+        const resp = await fetch('http://127.0.0.1:8000/users/financial-indicators/');
+        const data = await resp.json();
+        document.getElementById('dashboard-receita').textContent = 'R$ ' + data.receita.toLocaleString('pt-BR', {minimumFractionDigits: 2});
+        document.getElementById('dashboard-gastos').textContent = 'R$ ' + data.gastos.toLocaleString('pt-BR', {minimumFractionDigits: 2});
+        document.getElementById('dashboard-lucro').textContent = 'R$ ' + data.lucro_liquido.toLocaleString('pt-BR', {minimumFractionDigits: 2});
+        document.getElementById('dashboard-margem').textContent = data.margem_lucro.toLocaleString('pt-BR', {minimumFractionDigits: 2}) + '%';
+    } catch (err) {
+        // Em caso de erro, mantém os valores como --
+    }
+}
+carregarDashboardIndicadores();
+  // Gráfico Receitas vs Despesas com dados reais
+async function carregarGraficoReceitasDespesas(anoSelecionado) {
+    try {
+        const resp = await fetch('http://127.0.0.1:8000/users/financial-trends/');
+        const data = await resp.json();
+        // Filtrar por ano
+        const ano = anoSelecionado || (data.labels.length > 0 ? data.labels[data.labels.length-1].slice(0,4) : '2025');
+        const indices = data.labels.map((label, i) => label.startsWith(ano) ? i : -1).filter(i => i !== -1);
+        const labelsFiltrados = indices.map(i => data.labels[i]);
+        const receitasFiltradas = indices.map(i => data.receitas[i]);
+        const despesasFiltradas = indices.map(i => data.despesas[i]);
+        // Converter YYYY-MM para nome do mês
+        const meses = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+        const labelsMeses = labelsFiltrados.map(l => meses[parseInt(l.slice(5,7), 10)-1]);
+        // Destruir gráfico anterior se existir
+        if(window.revenueChartInstance) window.revenueChartInstance.destroy();
+        const ctx = document.getElementById('revenueChart').getContext('2d');
+        window.revenueChartInstance = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labelsMeses,
+                datasets: [
+                    {
+                        label: 'Receitas',
+                        data: receitasFiltradas,
+                        borderColor: getComputedStyle(document.documentElement).getPropertyValue('--chart-color-1'),
+                        backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--chart-color-1') + '20',
+                        tension: 0.4,
+                        fill: true
+                    },
+                    {
+                        label: 'Despesas',
+                        data: despesasFiltradas,
+                        borderColor: getComputedStyle(document.documentElement).getPropertyValue('--chart-color-4'),
+                        backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--chart-color-4') + '20',
+                        tension: 0.4,
+                        fill: true
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'top' },
+                }
+            }
+        });
+    } catch (err) {
+        // Em caso de erro, não mostra nada
+    }
+}
+// Dropdown de ano
+const selectAno = document.getElementById('ano-grafico');
+if(selectAno) {
+    selectAno.addEventListener('change', function() {
+        carregarGraficoReceitasDespesas(this.value);
+    });
+    // Padrão: ano mais recente disponível
+    carregarGraficoReceitasDespesas(selectAno.value);
+}
+
+async function carregarGraficoDistribuicaoCategoria() {
+    try {
+        const resp = await fetch('http://127.0.0.1:8000/users/expense-type-percentage/');
+        const data = await resp.json();
+        const labels = Object.keys(data);
+        const valores = Object.values(data);
+        const ctx = document.getElementById('expenseCategoryChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: valores,
+                    backgroundColor: [
+                        getComputedStyle(document.documentElement).getPropertyValue('--chart-color-1'),
+                        getComputedStyle(document.documentElement).getPropertyValue('--chart-color-2'),
+                        getComputedStyle(document.documentElement).getPropertyValue('--chart-color-3'),
+                        getComputedStyle(document.documentElement).getPropertyValue('--chart-color-4'),
+                        getComputedStyle(document.documentElement).getPropertyValue('--accent-color'),
+                        getComputedStyle(document.documentElement).getPropertyValue('--secondary-color'),
+                        getComputedStyle(document.documentElement).getPropertyValue('--primary-color'),
+                        getComputedStyle(document.documentElement).getPropertyValue('--success-color'),
+                        getComputedStyle(document.documentElement).getPropertyValue('--warning-color'),
+                    ],
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'top' },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.label + ': ' + context.raw + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    } catch (err) {
+        // Em caso de erro, não mostra nada
+    }
+}
+carregarGraficoDistribuicaoCategoria();
+
+async function carregarGraficoFluxoCaixaDashboard(anoSelecionado) {
+    try {
+        const resp = await fetch('http://127.0.0.1:8000/users/cash-flow/');
+        const data = await resp.json();
+        // Filtrar por ano
+        const ano = anoSelecionado || (data.labels.length > 0 ? data.labels[data.labels.length-1].slice(0,4) : '2025');
+        const indices = data.labels.map((label, i) => label.startsWith(ano) ? i : -1).filter(i => i !== -1);
+        const labelsFiltrados = indices.map(i => data.labels[i]);
+        const fluxoFiltrado = indices.map(i => data.fluxo_caixa[i]);
+        // Converter YYYY-MM para nome do mês
+        const meses = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+        const labelsMeses = labelsFiltrados.map(l => meses[parseInt(l.slice(5,7), 10)-1]);
+        // Definir cor de cada barra
+        const verde = getComputedStyle(document.documentElement).getPropertyValue('--success-color');
+        const vermelho = getComputedStyle(document.documentElement).getPropertyValue('--warning-color');
+        const cores = fluxoFiltrado.map(v => v < 0 ? vermelho : verde);
+        // Destruir gráfico anterior se existir
+        if(window.cashFlowChartInstance) window.cashFlowChartInstance.destroy();
+        const ctx = document.getElementById('cashFlowChart').getContext('2d');
+        window.cashFlowChartInstance = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labelsMeses,
+                datasets: [{
+                    label: 'Fluxo de Caixa',
+                    data: fluxoFiltrado,
+                    backgroundColor: cores,
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false },
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return 'R$ ' + value.toLocaleString('pt-BR');
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    } catch (err) {
+        // Em caso de erro, não mostra nada
+    }
+}
+const selectAnoFluxoDashboard = document.getElementById('ano-fluxo-dashboard');
+if(selectAnoFluxoDashboard) {
+    selectAnoFluxoDashboard.addEventListener('change', function() {
+        carregarGraficoFluxoCaixaDashboard(this.value);
+    });
+    carregarGraficoFluxoCaixaDashboard(selectAnoFluxoDashboard.value);
+}
+</script>
+</body>
+</html>

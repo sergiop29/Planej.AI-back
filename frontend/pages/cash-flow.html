@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fluxo de Caixa | Planej.AI</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" href="../img/favicon.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="../img/logo.png" alt="Planej.AI Logo">
+                <h1>Planej.AI</h1>
+            </div>
+            <nav class="nav-links">
+                <a href="dashboard.html">Painel</a>
+                <a href="financial-data.html">Dados</a>
+                <a href="agent-chat.html">Agente</a>
+                <a href="cash-flow.html" class="active">Fluxo de Caixa</a>
+            </nav>
+        </div>
+    </header>
+    <section class="dashboard">
+        <div class="container">
+            <div class="dashboard-header">
+                <div class="dashboard-title">
+                    <h2>Fluxo de Caixa</h2>
+                    <p>Veja o saldo mês a mês (Receita - Despesas) extraído do banco de dados</p>
+                </div>
+            </div>
+            <div class="card" style="max-width: 700px; margin: 0 auto;">
+                <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+                    <div class="card-title">Fluxo de Caixa Mensal</div>
+                    <div class="card-actions">
+                        <select id="ano-fluxo" class="form-control" style="padding: 5px 10px; font-size: 0.9rem; min-width: 90px;">
+                            <option value="2025">2025</option>
+                            <option value="2024">2024</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container" style="width: 100%; height: 420px;">
+                        <canvas id="cashFlowChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+    async function carregarGraficoFluxoCaixa(anoSelecionado) {
+        try {
+            const resp = await fetch('http://127.0.0.1:8000/users/cash-flow/');
+            const data = await resp.json();
+            // Filtrar por ano
+            const ano = anoSelecionado || (data.labels.length > 0 ? data.labels[data.labels.length-1].slice(0,4) : '2025');
+            const indices = data.labels.map((label, i) => label.startsWith(ano) ? i : -1).filter(i => i !== -1);
+            const labelsFiltrados = indices.map(i => data.labels[i]);
+            const fluxoFiltrado = indices.map(i => data.fluxo_caixa[i]);
+            // Converter YYYY-MM para nome do mês
+            const meses = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+            const labelsMeses = labelsFiltrados.map(l => meses[parseInt(l.slice(5,7), 10)-1]);
+            // Definir cor de cada barra
+            const verde = getComputedStyle(document.documentElement).getPropertyValue('--success-color');
+            const vermelho = getComputedStyle(document.documentElement).getPropertyValue('--warning-color');
+            const cores = fluxoFiltrado.map(v => v < 0 ? vermelho : verde);
+            // Destruir gráfico anterior se existir
+            if(window.cashFlowChartInstance) window.cashFlowChartInstance.destroy();
+            const ctx = document.getElementById('cashFlowChart').getContext('2d');
+            window.cashFlowChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labelsMeses,
+                    datasets: [{
+                        label: 'Fluxo de Caixa',
+                        data: fluxoFiltrado,
+                        backgroundColor: cores,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false },
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return 'R$ ' + value.toLocaleString('pt-BR');
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        } catch (err) {
+            // Em caso de erro, não mostra nada
+        }
+    }
+    const selectAnoFluxo = document.getElementById('ano-fluxo');
+    if(selectAnoFluxo) {
+        selectAnoFluxo.addEventListener('change', function() {
+            carregarGraficoFluxoCaixa(this.value);
+        });
+        carregarGraficoFluxoCaixa(selectAnoFluxo.value);
+    }
+    </script>
+</body>
+</html> 

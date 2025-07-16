@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload CSV para Vectorstore</title>
+</head>
+<body>
+    <h1>Upload de CSV para Vectorstore</h1>
+    <form id="form-upload-csv" enctype="multipart/form-data">
+        <label for="file">Selecione o arquivo CSV:</label><br>
+        <input type="file" id="file" name="file" accept=".csv" required><br><br>
+        <button type="submit">Enviar</button>
+    </form>
+    <pre id="resultado" style="background:#eee; padding:10px; margin-top:20px;"></pre>
+    <script>
+        document.getElementById('form-upload-csv').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const formData = new FormData();
+            const fileInput = document.getElementById('file');
+            if (!fileInput.files.length) {
+                alert('Selecione um arquivo CSV!');
+                return;
+            }
+            formData.append('file', fileInput.files[0]);
+            const resultado = document.getElementById('resultado');
+            resultado.textContent = 'Enviando...';
+            try {
+                const resp = await fetch('http://127.0.0.1:8000/users/upload-csv-vectorstore/', {
+                    method: 'POST',
+                    body: formData
+                });
+                const text = await resp.text();
+                resultado.textContent = 'Status: ' + resp.status + '\n' + text;
+            } catch (err) {
+                resultado.textContent = 'Erro: ' + err;
+            }
+        });
+    </script>
+</body>
+</html> 

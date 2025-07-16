@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Teste API Backend</title>
+</head>
+<body>
+    <h1>Teste de Requisição para o Backend</h1>
+    <form id="form-teste">
+        <input type="text" id="pergunta" placeholder="Digite uma pergunta" required>
+        <button type="submit">Enviar</button>
+    </form>
+    <pre id="resultado" style="background:#eee; padding:10px; margin-top:20px;"></pre>
+    <script>
+        document.getElementById('form-teste').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const pergunta = document.getElementById('pergunta').value;
+            const resultado = document.getElementById('resultado');
+            resultado.textContent = 'Enviando...';
+            try {
+                const resp = await fetch('http://127.0.0.1:8000/users/financial-agent/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ question: pergunta })
+                });
+                const text = await resp.text();
+                resultado.textContent = 'Status: ' + resp.status + '\n' + text;
+            } catch (err) {
+                resultado.textContent = 'Erro: ' + err;
+            }
+        });
+    </script>
+</body>
+</html> 

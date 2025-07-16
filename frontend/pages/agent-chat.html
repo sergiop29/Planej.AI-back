@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat com Agente IA | Planej.AI</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" href="../img/favicon.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="../img/logo.png" alt="Planej.AI Logo">
+                <h1>Planej.AI</h1>
+            </div>
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav class="nav-links">
+                <a href="dashboard.html">Painel</a>
+                <a href="financial-data.html">Dados</a>
+                <a href="agent-chat.html" class="active">Agente</a>
+            </nav>
+            <div class="user-actions">
+                <div class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </div>
+                <div class="user-profile">
+                    <img src="../img/avatar.png" alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%;">
+                    <span>Olá, Sergio</span>
+                    <i class="fas fa-chevron-down" style="font-size: 0.8rem; margin-left: 5px;"></i>
+                    
+                    <!-- Dropdown Menu -->
+                    <div class="profile-dropdown">
+                        <ul>
+                            <li><a href="#"><i class="fas fa-user"></i> Meu Perfil</a></li>
+                            <li><a href="#"><i class="fas fa-cog"></i> Configurações</a></li>
+                            <li><a href="#"><i class="fas fa-credit-card"></i> Assinatura</a></li>
+                            <li><a href="#"><i class="fas fa-question-circle"></i> Ajuda</a></li>
+                            <li><a href="../index.html"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Chat Section -->
+    <section class="dashboard">
+        <div class="container">
+            <div class="dashboard-header">
+                <div class="dashboard-title">
+                    <h2>Assistente Financeiro IA</h2>
+                    <p>Converse com nosso assistente inteligente para obter insights e recomendações personalizadas</p>
+                </div>
+            </div>
+
+            <!-- Chat Interface -->
+            <div class="chat-container">
+                
+                <div class="chat-main">
+                    <div class="chat-header">
+                        <div class="chat-header-avatar">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="chat-header-info">
+                            <h3>Assistente Financeiro</h3>
+                            <p>Online</p>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-messages">
+                        <!-- Mensagens do chat serão inseridas dinamicamente pelo JS -->
+                    </div>
+                    
+                    <form class="chat-input">
+                        <input type="text" placeholder="Digite sua mensagem...">
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Suggested Questions -->
+            <div class="card" style="margin-top: 30px;">
+                <div class="card-header">
+                    <div class="card-title">Perguntas Sugeridas</div>
+                </div>
+                <div class="card-body">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                        <button class="btn btn-outline pergunta-sugerida" style="text-align: left;">Como posso reduzir minhas despesas operacionais?</button>
+                        <button class="btn btn-outline pergunta-sugerida" style="text-align: left;">Qual é a melhor estratégia para aumentar minha receita?</button>
+                        <button class="btn btn-outline pergunta-sugerida" style="text-align: left;">Como otimizar meu capital de giro?</button>
+                        <button class="btn btn-outline pergunta-sugerida" style="text-align: left;">Quais são os melhores investimentos para meu negócio?</button>
+                        <button class="btn btn-outline pergunta-sugerida" style="text-align: left;">Como melhorar minha gestão de estoque?</button>
+                        <button class="btn btn-outline pergunta-sugerida" style="text-align: left;">Quais são os riscos financeiros do meu negócio?</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+// Permitir envio de perguntas sugeridas como mensagem do usuário
+document.addEventListener('DOMContentLoaded', function() {
+  const perguntas = document.querySelectorAll('.pergunta-sugerida');
+  perguntas.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const chatInput = document.querySelector('.chat-input input');
+      if (chatInput) {
+        chatInput.value = this.textContent;
+        // Disparar o envio como se fosse o usuário
+        const chatForm = document.querySelector('.chat-input');
+        if (chatForm) {
+          chatForm.dispatchEvent(new Event('submit', {cancelable: true, bubbles: true}));
+        }
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

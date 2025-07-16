@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar uma Conta | FinancePro</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="../img/logo.png" alt="FinancePro Logo" id="logo-placeholder">
+                <h1>FinancePro</h1>
+            </div>
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav class="nav-links">
+                <a href="../index.html#features">Recursos</a>
+                <a href="../index.html#pricing">Planos</a>
+                <a href="../index.html#faq">FAQ</a>
+                <a href="../index.html#about">Sobre nós</a>
+            </nav>
+            <div class="user-actions">
+                <a href="login.html" class="btn btn-outline">Entrar</a>
+                <a href="signup.html" class="btn btn-primary">Começar Grátis</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Signup Form -->
+    <section class="form-section">
+        <div class="container">
+            <div class="form-container">
+                <div class="form-header">
+                    <img src="../img/logo.png" alt="FinancePro Logo" id="form-logo-placeholder">
+                    <h2>Criar uma conta</h2>
+                    <p>Comece a transformar as finanças do seu negócio hoje mesmo</p>
+                </div>
+                <form id="signupForm" onsubmit="simulateSignup(event)">
+                    <div class="form-group">
+                        <label for="firstName">Nome</label>
+                        <input type="text" id="firstName" class="form-control" placeholder="Seu nome">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Sobrenome</label>
+                        <input type="text" id="lastName" class="form-control" placeholder="Seu sobrenome">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" class="form-control" placeholder="seu@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Senha</label>
+                        <div class="password-field">
+                            <input type="password" id="password" class="form-control" placeholder="********">
+                            <span class="password-toggle"><i class="fas fa-eye"></i></span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Cadastrar</button>
+                    <div class="form-footer">
+                        <p>Já tem uma conta? <a href="login.html">Entrar</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <div class="logo">
+                        <img src="../img/logo.png" alt="FinancePro Logo" id="footer-logo-placeholder">
+                        <h3>FinancePro</h3>
+                    </div>
+                    <p>Transformando a saúde financeira de pequenos negócios com tecnologia e inteligência.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Recursos</h3>
+                    <ul class="footer-links">
+                        <li><a href="../index.html#features">Plano AI Plus</a></li>
+                        <li><a href="../index.html#features">Automações</a></li>
+                        <li><a href="../index.html#features">Assistência Personalizada</a></li>
+                        <li><a href="../index.html#features">Dashboards</a></li>
+                        <li><a href="../index.html#features">Versão Mobile</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Empresa</h3>
+                    <ul class="footer-links">
+                        <li><a href="../index.html#about">Sobre nós</a></li>
+                        <li><a href="../index.html#testimonials">Depoimentos</a></li>
+                        <li><a href="../index.html#blog">Blog</a></li>
+                        <li><a href="../index.html#careers">Carreiras</a></li>
+                        <li><a href="../index.html#contact">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Suporte</h3>
+                    <ul class="footer-links">
+                        <li><a href="../index.html#help">Central de Ajuda</a></li>
+                        <li><a href="../index.html#faq">FAQ</a></li>
+                        <li><a href="../index.html#docs">Documentação</a></li>
+                        <li><a href="../index.html#community">Comunidade</a></li>
+                        <li><a href="../index.html#status">Status do Sistema</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 FinancePro. Todos os direitos reservados.</p>
+                <div class="footer-legal">
+                    <a href="#terms">Termos de Serviço</a>
+                    <a href="#privacy">Política de Privacidade</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/main.js"></script>
+</body>
+</html>

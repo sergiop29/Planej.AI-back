@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indicadores Financeiros | Planej.AI</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" href="../img/favicon.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="../img/logo.png" alt="Planej.AI Logo">
+                <h1>Planej.AI</h1>
+            </div>
+            <nav class="nav-links">
+                <a href="dashboard.html">Painel</a>
+                <a href="financial-data.html">Dados</a>
+                <a href="agent-chat.html">Agente</a>
+                <a href="indicators.html" class="active">Indicadores</a>
+            </nav>
+        </div>
+    </header>
+    <section class="dashboard">
+        <div class="container">
+            <div class="dashboard-header">
+                <div class="dashboard-title">
+                    <h2>Indicadores Financeiros</h2>
+                    <p>Resumo dos principais indicadores calculados a partir dos seus dados</p>
+                </div>
+            </div>
+            <div class="stats-grid" id="indicators-grid">
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <h3>Receita</h3>
+                        <div class="stat-icon" style="background-color: rgba(16, 172, 132, 0.1); color: var(--success-color);">
+                            <i class="fas fa-arrow-up"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value" id="receita">R$ --</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <h3>Gastos</h3>
+                        <div class="stat-icon" style="background-color: rgba(238, 82, 83, 0.1); color: var(--warning-color);">
+                            <i class="fas fa-arrow-down"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value" id="gastos">R$ --</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <h3>Lucro Líquido</h3>
+                        <div class="stat-icon" style="background-color: rgba(74, 71, 163, 0.1); color: var(--secondary-color);">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value" id="lucro-liquido">R$ --</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <h3>Margem de Lucro</h3>
+                        <div class="stat-icon" style="background-color: rgba(255, 159, 67, 0.1); color: var(--accent-color);">
+                            <i class="fas fa-percentage"></i>
+                        </div>
+                    </div>
+                    <div class="stat-value" id="margem-lucro">-- %</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+    async function carregarIndicadores() {
+        try {
+            const resp = await fetch('http://127.0.0.1:8000/users/financial-indicators/');
+            const data = await resp.json();
+            document.getElementById('receita').textContent = 'R$ ' + data.receita.toLocaleString('pt-BR', {minimumFractionDigits: 2});
+            document.getElementById('gastos').textContent = 'R$ ' + data.gastos.toLocaleString('pt-BR', {minimumFractionDigits: 2});
+            document.getElementById('lucro-liquido').textContent = 'R$ ' + data.lucro_liquido.toLocaleString('pt-BR', {minimumFractionDigits: 2});
+            document.getElementById('margem-lucro').textContent = data.margem_lucro.toLocaleString('pt-BR', {minimumFractionDigits: 2}) + ' %';
+        } catch (err) {
+            // Em caso de erro, mantém os valores como --
+        }
+    }
+    carregarIndicadores();
+    </script>
+</body>
+</html> 

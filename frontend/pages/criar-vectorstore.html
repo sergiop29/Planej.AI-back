@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Criar Vectorstore</title>
+</head>
+<body>
+    <h1>Criar Vectorstore</h1>
+    <form id="form-vectorstore">
+        <label for="dados">Cole seus dados financeiros (texto):</label><br>
+        <textarea id="dados" rows="10" cols="60" required></textarea><br>
+        <button type="submit">Criar Vectorstore</button>
+    </form>
+    <pre id="resultado" style="background:#eee; padding:10px; margin-top:20px;"></pre>
+    <script>
+        document.getElementById('form-vectorstore').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const dados = document.getElementById('dados').value;
+            const resultado = document.getElementById('resultado');
+            resultado.textContent = 'Enviando...';
+            try {
+                const resp = await fetch('http://127.0.0.1:8000/users/criar-vectorstore/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ dados })
+                });
+                const text = await resp.text();
+                resultado.textContent = 'Status: ' + resp.status + '\n' + text;
+            } catch (err) {
+                resultado.textContent = 'Erro: ' + err;
+            }
+        });
+    </script>
+</body>
+</html> 

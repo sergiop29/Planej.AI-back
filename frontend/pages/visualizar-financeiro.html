@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Visualizar Dados Financeiros</title>
+    <style>
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background: #f4f4f4; }
+    </style>
+</head>
+<body>
+    <h1>Visualizar Dados Financeiros</h1>
+    <button onclick="window.location.reload()">Atualizar</button>
+    <div id="tabela"></div>
+    <script>
+        async function carregarTabela() {
+            const tabelaDiv = document.getElementById('tabela');
+            tabelaDiv.textContent = 'Carregando...';
+            try {
+                const resp = await fetch('http://127.0.0.1:8000/users/financial-records/');
+                const data = await resp.json();
+                if (!data.length) {
+                    tabelaDiv.textContent = 'Nenhum dado encontrado.';
+                    return;
+                }
+                let html = '<table><thead><tr>';
+                for (const col of Object.keys(data[0])) {
+                    html += `<th>${col}</th>`;
+                }
+                html += '</tr></thead><tbody>';
+                for (const row of data) {
+                    html += '<tr>';
+                    for (const col of Object.keys(row)) {
+                        html += `<td>${row[col]}</td>`;
+                    }
+                    html += '</tr>';
+                }
+                html += '</tbody></table>';
+                tabelaDiv.innerHTML = html;
+            } catch (err) {
+                tabelaDiv.textContent = 'Erro ao carregar dados: ' + err;
+            }
+        }
+        carregarTabela();
+    </script>
+</body>
+</html> 

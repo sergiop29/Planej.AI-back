@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assistente IA | FinancePro</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="../img/logo.png" alt="FinancePro Logo" id="logo-placeholder">
+                <h1>FinancePro</h1>
+            </div>
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav class="nav-links">
+                <a href="dashboard.html">Dashboard</a>
+                <a href="financial-data.html">Dados Financeiros</a>
+                <a href="reports.html">Relatórios</a>
+                <a href="agent.html" class="active">Assistente IA</a>
+            </nav>
+            <div class="user-actions">
+                <div class="user-profile">
+                    <img src="../img/avatar.png" alt="Avatar" id="avatar-placeholder" style="width: 40px; height: 40px; border-radius: 50%;">
+                    <span>Olá, Sergio</span>
+                </div>
+                <a href="../index.html" class="btn btn-outline btn-sm">Sair</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Agent Section -->
+    <section class="dashboard">
+        <div class="container">
+            <div class="dashboard-header">
+                <div class="dashboard-title">
+                    <h2>Assistente Financeiro IA</h2>
+                    <p>Seu consultor financeiro inteligente disponível 24/7</p>
+                </div>
+                <div class="dashboard-actions">
+                    <button class="btn btn-outline">Histórico</button>
+                    <button class="btn btn-primary">Nova Consulta</button>
+                </div>
+            </div>
+
+            <!-- Agent Interface -->
+            <div style="display: flex; gap: 30px; margin-bottom: 30px;">
+                <!-- Agent Chat -->
+                <div style="flex: 2;">
+                    <div class="card" style="height: 600px; display: flex; flex-direction: column;">
+                        <div class="card-header" style="border-bottom: 1px solid var(--border-color);">
+                            <div style="display: flex; align-items: center;">
+                                <div style="width: 40px; height: 40px; border-radius: 50%; background-color: var(--secondary-color); display: flex; align-items: center; justify-content: center; margin-right: 15px;">
+                                    <i class="fas fa-robot" style="color: white;"></i>
+                                </div>
+                                <div>
+                                    <div class="card-title" style="margin-bottom: 0;">Assistente Financeiro</div>
+                                    <span style="font-size: 0.8rem; color: var(--success-color);">Online</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body" style="flex: 1; overflow-y: auto; padding: 20px;">
+                            <!-- Chat Messages Dinâmico -->
+                            <div class="chat-messages" style="height: 100%; display: flex; flex-direction: column; gap: 20px; overflow-y: auto;"></div>
+                        </div>
+                        <form class="chat-input" style="padding: 15px; border-top: 1px solid var(--border-color); display: flex; gap: 10px;" autocomplete="off">
+                            <input type="text" class="form-control" placeholder="Digite sua mensagem..." style="flex: 1;" required>
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i></button>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Agent Info and Suggestions -->
+                <div style="flex: 1;">
+                    <div class="card" style="margin-bottom: 20px;">
+                        <div class="card-header">
+                            <div class="card-title">Sobre o Assistente</div>
+                        </div>
+                        <div class="card-body">
+                            <p>Seu assistente financeiro IA utiliza inteligência artificial avançada para analisar seus dados financeiros e fornecer recomendações personalizadas para melhorar a saúde financeira do seu negócio.</p>
+                            <div style="margin-top: 15px;">
+                                <h4>Capacidades:</h4>
+                                <ul style="list-style: none; padding: 0; margin-top: 10px;">
+                                    <li style="margin-bottom: 8px;">
+                                        <i class="fas fa-check" style="color: var(--primary-color); margin-right: 8px;"></i>
+                                        Análise financeira detalhada
+                                    </li>
+                                    <li style="margin-bottom: 8px;">
+                                        <i class="fas fa-check" style="color: var(--primary-color); margin-right: 8px;"></i>
+                                        Previsões e projeções
+                                    </li>
+                                    <li style="margin-bottom: 8px;">
+                                        <i class="fas fa-check" style="color: var(--primary-color); margin-right: 8px;"></i>
+                                        Recomendações estratégicas
+                                    </li>
+                                    <li style="margin-bottom: 8px;">
+                                        <i class="fas fa-check" style="color: var(--primary-color); margin-right: 8px;"></i>
+                                        Planos de ação personalizados
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Perguntas Sugeridas</div>
+                        </div>
+                        <div class="card-body">
+                            <div style="display: flex; flex-direction: column; gap: 10px;">
+                                <button class="btn btn-outline" style="text-align: left;">Como posso reduzir minhas despesas operacionais?</button>
+                                <button class="btn btn-outline" style="text-align: left;">Qual é a melhor estratégia para aumentar minha receita?</button>
+                                <button class="btn btn-outline" style="text-align: left;">Como otimizar meu capital de giro?</button>
+                                <button class="btn btn-outline" style="text-align: left;">Quais são os melhores investimentos para meu negócio?</button>
+                                <button class="btn btn-outline" style="text-align: left;">Como melhorar minha gestão de estoque?</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Financial Insights -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Insights Financeiros Recentes</div>
+                    <div class="card-actions">
+                        <button class="btn btn-sm btn-outline">Ver Todos</button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-title">Oportunidade de Economia</div>
+                                <div class="stat-icon" style="background-color: rgba(16, 172, 132, 0.1); color: var(--success-color);">
+                                    <i class="fas fa-piggy-bank"></i>
+                                </div>
+                            </div>
+                            <div class="stat-value">R$ 12.500,00</div>
+                            <p style="margin: 10px 0 0 0; font-size: 0.9rem;">Redução potencial em despesas operacionais</p>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-title">Aumento de Receita</div>
+                                <div class="stat-icon" style="background-color: rgba(74, 71, 163, 0.1); color: var(--secondary-color);">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                            </div>
+                            <div class="stat-value">18%</div>
+                            <p style="margin: 10px 0 0 0; font-size: 0.9rem;">Potencial com ajustes de precificação</p>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-title">Melhoria no Fluxo de Caixa</div>
+                                <div class="stat-icon" style="background-color: rgba(255, 159, 67, 0.1); color: var(--accent-color);">
+                                    <i class="fas fa-coins"></i>
+                                </div>
+                            </div>
+                            <div class="stat-value">R$ 45.000,00</div>
+                            <p style="margin: 10px 0 0 0; font-size: 0.9rem;">Liberação potencial com otimização de estoque</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recommended Actions -->
+            <div class="card" style="margin-top: 30px;">
+                <div class="card-header">
+                    <div class="card-title">Ações Recomendadas</div>
+                </div>
+                <div class="card-body">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                        <div style="padding: 20px; border: 1px solid var(--border-color); border-radius: 10px;">
+                            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                                <div style="width: 40px; height: 40px; border-radius: 50%; background-color: rgba(16, 172, 132, 0.1); display: flex; align-items: center; justify-content: center; margin-right: 15px;">
+                                    <i class="fas fa-file-invoice-dollar" style="color: var(--success-color);"></i>
+                                </div>
+                                <h3 style="margin: 0; font-size: 1.2rem;">Revisar Política de Recebimentos</h3>
+                            </div>
+                            <p>Reduza o prazo médio de recebimento de 25 para 15 dias, alinhando com seu ciclo de pagamentos.</p>
+                            <div style="margin-top: 15px;">
+                                <button class="btn btn-sm btn-outline">Ver Plano Detalhado</button>
+                            </div>
+                        </div>
+                        <div style="padding: 20px; border: 1px solid var(--border-color); border-radius: 10px;">
+                            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                                <div style="width: 40px; height: 40px; border-radius: 50%; background-color: rgba(74, 71, 163, 0.1); display: flex; align-items: center; justify-content: center; margin-right: 15px;">
+                                    <i class="fas fa-tags" style="color: var(--secondary-color);"></i>
+                                </div>
+                                <h3 style="margin: 0; font-size: 1.2rem;">Ajustar Estratégia de Preços</h3>
+                            </div>
+                            <p>Implemente aumentos graduais de 5% por trimestre nos produtos A, B e C para alinhar com o mercado.</p>
+                            <div style="margin-top: 15px;">
+                                <button class="btn btn-sm btn-outline">Ver Plano Detalhado</button>
+                            </div>
+                        </div>
+                        <div style="padding: 20px; border: 1px solid var(--border-color); border-radius: 10px;">
+                            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                                <div style="width: 40px; height: 40px; border-radius: 50%; background-color: rgba(255, 159, 67, 0.1); display: flex; align-items: center; justify-content: center; margin-right: 15px;">
+                                    <i class="fas fa-boxes" style="color: var(--accent-color);"></i>
+                                </div>
+                                <h3 style="margin: 0; font-size: 1.2rem;">Otimizar Gestão de Estoque</h3>
+                            </div>
+                            <p>Implemente sistema just-in-time para reduzir o estoque de 35% para 20% do capital de giro.</p>
+                            <div style="margin-top: 15px;">
+                                <button class="btn btn-sm btn-outline">Ver Plano Detalhado</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planos e Preços | FinancePro</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="../img/logo.png" alt="FinancePro Logo" id="logo-placeholder">
+                <h1>FinancePro</h1>
+            </div>
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav class="nav-links">
+                <a href="../index.html#features">Recursos</a>
+                <a href="../index.html#pricing" class="active">Planos</a>
+                <a href="../index.html#faq">FAQ</a>
+                <a href="../index.html#about">Sobre nós</a>
+            </nav>
+            <div class="user-actions">
+                <a href="login.html" class="btn btn-outline">Entrar</a>
+                <a href="signup.html" class="btn btn-primary">Começar Grátis</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section">
+        <div class="container">
+            <div class="pricing-header">
+                <h2>Escolha o plano ideal para o seu negócio</h2>
+                <p>Oferecemos planos flexíveis que se adaptam às necessidades da sua empresa, desde pequenos empreendedores até negócios em expansão</p>
+            </div>
+            
+            <!-- Pricing Toggle -->
+            <div style="display: flex; justify-content: center; margin-bottom: 40px;">
+                <div style="display: flex; align-items: center; background-color: #f5f6fa; border-radius: 30px; padding: 5px;">
+                    <button class="btn" style="background-color: var(--primary-color); color: white; border-radius: 30px; margin-right: 10px;">Mensal</button>
+                    <button class="btn" style="background-color: transparent; color: var(--text-color); border-radius: 30px;">Anual (20% de desconto)</button>
+                </div>
+            </div>
+
+            <div class="pricing-grid">
+                <div class="pricing-card" id="plan-basic">
+                    <h3 class="pricing-name">Básico</h3>
+                    <div class="pricing-price">R$99,00<span>/mês</span></div>
+                    <p style="margin-bottom: 20px; color: var(--light-text);">Ideal para empreendedores individuais e microempresas</p>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check" style="color: var(--primary-color); margin-right: 8px;"></i> Dashboard financeiro básico</li>
+                        <li><i class="fas fa-check" style="color: var(--primary-color); margin-right: 8px;"></i> Controle de receitas e despesas</li>
+                        <li><i class="fas fa-check" style="color: var(--primary-color); margin-right: 8px;"></i> Relatórios mensais</li>
+                        <li><i class="fas fa-check" style="color: var(--primary-color); margin-right: 8px;"></i> Acesso para 1 usuário</li>
+                        <li><i class="fas fa-check" style="color: var(--primary-color); margin-right: 8px;"></i> Suporte por e-mail</li>
+                        <li><i class="fas fa-times" style="color: var(--light-text); margin-right: 8px;"></i> Previsões financeiras</li>
+                        <li><i class="fas fa-times" style="color: var(--light-text); margin-right: 8px;"></i> Automações de lançamentos</li>
+                        <li><i class="fas fa-times" style="color: var(--light-text); margin-right: 8px;"></i> Assistente IA</li>
+                    </ul>
+                    <a href="payment.html?plan=basic" class="btn btn-outline" style="width: 100%;">Começar Agora</a>
+                </div>
+                <div class="pricing-card featured" id="plan-pro">
+                    <div style="position: absolute; top: 0; right: 0; background-color: var(--primary-color); color: white; padding: 5px 15px; font-size: 0.8rem; border-bottom-left-radius: 10px;">Popular</div>
+                    <h3 class="pricing-name">Profissional</h3>
+                    <div class="pricing-price">R$199,00<span>/mês</span></div>
+                    <p style="margin-bottom: 20px; color: var(--light-text);">Perfeito para pequenas empresas em crescimento</p>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check" style="color: var(--primary-color); margin-right: 8px;"></i> Tudo do plano Básico</li>
+                        <li><i class="fas fa-check" style="color: var(--primary-color); margin-right: 8px;"></i> Previsões financeiras</li>
+                        <li><i class="fas fa-check" style="color: var(--primary-color); margin-right: 8px;"></i> Automações de lançamentos</li>
+                        <li><i class="fas fa-check" style="color: var(--primary-color); margin-right: 8px;"></i> Acesso para 3 usuários</li>
+                        <li><i class="fas fa-check" style="color: var(--primary-color); margin-right: 8px;"></i> Suporte prioritário</li>
+                        <li><i class="fas fa-check" style="color: var(--primary-color); margin-right: 8px;"></i> Relatórios avançados</li>
+                        <li><i class="fas fa-check" style="color: var(--primary-color); margin-right: 8px;"></i> Integração com sistemas contábeis</li>
+                        <li><i class="fas fa-times" style="color: var(--light-text); margin-right: 8px;"></i> Assistente IA completo</li>
+                    </ul>
+                    <a href="payment.html?plan=pro" class="btn btn-primary" style="width: 100%;">Começar Agora</a>
+                </div>
+                <div class="pricing-card" id="plan-enterprise">
+                    <h3 class="pricing-name">Empresarial</h3>
+                    <div class="pricing-price">R$399,00<span>/mês</span></div>
+                    <p style="margin-bottom: 20px; color: var(--light-text);">Solução completa para empresas estabelecidas</p>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check" style="color: var(--primary-color); margin-right: 8px;"></i> Tudo do plano Profissional</li>
+                        <li><i class="fas fa-check" style="color: var(--primary-color); margin-right: 8px;"></i> IA para análise financeira</li>
+                        <li><i class="fas fa-check" style="color: var(--primary-color); margin-right: 8px;"></i> Consultoria financeira mensal</li>
+                        <li><i class="fas fa-check" style="color: var(--primary-color); margin-right: 8px;"></i> Acesso para equipe ilimitada</li>
+                        <li><i class="fas fa-check" style="color: var(--primary-color); margin-right: 8px;"></i> Suporte 24/7</li>
+                        <li><i class="fas fa-check" style="color: var(--primary-color); margin-right: 8px;"></i> Personalização de relatórios</li>
+                        <li><i class="fas fa-check" style="color: var(--primary-color); margin-right: 8px;"></i> API para integrações avançadas</li>
+                        <li><i class="fas fa-check" style="color: var(--primary-color); margin-right: 8px;"></i> Ambiente dedicado</li>
+                    </ul>
+                    <a href="payment.html?plan=enterprise" class="btn btn-outline" style="width: 100%;">Começar Agora</a>
+                </div>
+            </div>
+            
+            <div class="pricing-note" style="text-align: center; margin-top: 30px;">
+                <p>Todos os planos incluem período de teste gratuito de 14 dias. Sem compromisso, cancele a qualquer momento.</p>
+                <p style="margin-top: 10px;">Precisa de um plano personalizado? <a href="#contact" style="color: var(--primary-color);">Entre em contato conosco</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Table -->
+    <section class="comparison-section" style="padding: 50px 0; background-color: #f5f6fa;">
+        <div class="container">
+            <div class="section-header" style="text-align: center; margin-bottom: 40px;">
+                <h2>Comparativo Detalhado dos Planos</h2>
+                <p>Veja todas as funcionalidades disponíveis em cada plano</p>
+            </div>
+            
+            <div class="comparison-table" style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; background-color: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);">
+                    <thead>
+                        <tr>
+                            <th style="padding: 15px; text-align: left; border-bottom: 1px solid var(--border-color);">Funcionalidades</th>
+                            <th style="padding: 15px; text-align: center; border-bottom: 1px solid var(--border-color);">Básico</th>
+                            <th style="padding: 15px; text-align: center; border-bottom: 1px solid var(--border-color); background-color: rgba(0, 201, 167, 0.1);">Profissional</th>
+                            <th style="padding: 15px; text-align: center; border-bottom: 1px solid var(--border-color);">Empresarial</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 15px; border-bottom: 1px solid var(--border-color);"><strong>Dashboard Financeiro</strong></td>
+                            <td style="padding: 15px; text-align: center; border-bottom: 1px solid var(--border-color);">Básico</td>
+                            <td style="padding: 15px; text-align: center; border-bottom: 1px solid var(--border-color); background-color: rgba(0, 201, 167, 0.1);">Avançado</td>
+                            <td style="padding: 15px; text-align: center; border-bottom: 1px solid var(--border-color);">Completo</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px; border-bottom: 1px solid var(--border-color);"><strong>Usuários</strong></td>
+                            <td style="padding: 15px; text-align: center; border-bottom: 1px solid var(--border-color);">1</td>
+                            <td style="padding: 15px; text-align: center; border-bottom: 1px solid var(--border-color); background-color: rgba(0, 201, 167, 0.1);">3</td>
+                            <td style="padding: 15px; text-align: center; border-bottom: 1px solid var(--border-color);">Ilimitado</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px; border-bottom: 1px solid var(--border-color);"><strong>Relatórios</strong></td>
+                            <td style="padding: 15px; text-align: center; border-bottom: 1px solid var(--border-color);">Básicos</td>
+                            <td style="padding: 15px; text-align: center; border-bottom: 1px solid var(--border-color); background-color: rgba(0, 201, 167, 0.1);">Avançados</td>
+                            <td style="padding: 15px; text-align: center; border-bottom: 1px solid var(--border-color);">Personalizados</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px; border-bottom: 1px solid var(--border-color);"><strong>Previsões Financeiras</strong></td>
+                            <td style="padding: 15px; text-align: center; border-bottom: 1px solid var(--border-color);"><i class="fas fa-times" style="color: var(--light-text);"></i></td>
+                            <td style="padding: 15px; text-align: center; border-bottom: 1px solid var(--border-color); background-color: rgba(0, 201, 167, 0.1);"><i class="fas fa-check" style="color: var(--primary-color);"></i></td>
+                            <td style="padding: 15px; text-align: center; border-bottom: 1px solid var(--border-color);"><i class="fas fa-check" style="color: var(--primary-color);"></i></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px; border-bottom: 1px solid var(--border-color);"><strong>Automações</strong></td>
+                            <td style="padding: 15px; text-align: center; border-bottom: 1px solid var(--border-color);"><i class="fas fa-times" style="color: var(--light-text);"></i></td>
+                            <td style="padding: 15px; text-align: center; border-bottom: 1px solid var(--border-color); background-color: rgba(0, 201, 167, 0.1);"><i class="fas fa-check" style="color: var(--primary-color);"></i></td>
+                            <td style="padding: 15px; text-align: center; border-bottom: 1px solid var(--border-color);"><i class="fas fa-check" style="color: var(--primary-color);"></i></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px; border-bottom: 1px solid var(--border-color);"><strong>Assistente IA</strong></td>
+                            <td style="padding: 15px; text-align: center; border-bottom: 1px solid var(--border-color);"><i class="fas fa-times" style="color: var(--light-text);"></i></td>
+                            <td style="padding: 15px; text-align: center; border-bottom: 1px solid var(--border-color); background-color: rgba(0, 201, 167, 0.1);">Básico</td>
+                            <td style="padding: 15px; text-align: center; border-bottom: 1px solid var(--border-color);">Completo</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px; border-bottom: 1px solid var(--border-color);"><strong>Consultoria Financeira</strong></td>
+                            <td style="padding: 15px; text-align: center; border-bottom: 1px solid var(--border-color);"><i class="fas fa-times" style="color: var(--light-text);"></i></td>
+                            <td style="padding: 15px; text-align: center; border-bottom: 1px solid var(--border-color); background-color: rgba(0, 201, 167, 0.1);"><i class="fas fa-times" style="color: var(--light-text);"></i></td>
+                            <td style="padding: 15px; text-align: center; border-bottom: 1px solid var(--border-color);">Mensal</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px; border-bottom: 1px solid var(--border-color);"><strong>Integrações</strong></td>
+                            <td style="padding: 15px; text-align: center; border-bottom: 1px solid var(--border-color);">Básicas</td>
+                            <td style="padding: 15px; text-align: center; border-bottom: 1px solid var(--border-color); background-color: rgba(0, 201, 167, 0.1);">Avançadas</td>
+                            <td style="padding: 15px; text-align: center; border-bottom: 1px solid var(--border-color);">API Completa</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px; border-bottom: 1px solid var(--border-color);"><strong>Suporte</strong></td>
+                            <td style="padding: 15px; text-align: center; border-bottom: 1px solid var(--border-color);">Email</td>
+                            <td style="padding: 15px; text-align: center; border-bottom: 1px solid var(--border-color); background-color: rgba(0, 201, 167, 0.1);">Prioritário</td>
+                            <td style="padding: 15px; text-align: center; border-bottom: 1px solid var(--border-color);">24/7</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px;"><strong>Preço Mensal</strong></td>
+                            <td style="padding: 15px; text-align: center;"><strong>R$99,00</strong></td>
+                            <td style="padding: 15px; text-align: center; background-color: rgba(0, 201, 167, 0.1);"><strong>R$199,00</strong></td>
+                            <td style="padding: 15px; text-align: center;"><strong>R$399,00</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px;"></td>
+                            <td style="padding: 15px; text-align: center;"><a href="payment.html?plan=basic" class="btn btn-outline">Escolher</a></td>
+                            <td style="padding: 15px; text-align: center; background-color: rgba(0, 201, 167, 0.1);"><a href="payment.html?plan=pro" class="btn btn-primary">Escolher</a></td>
+                            <td style="padding: 15px; text-align: center;"><a href="payment.html?plan=enterprise" class="btn btn-outline">Escolher</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" style="padding: 50px 0;">
+        <div class="container">
+            <div class="section-header" style="text-align: center; margin-bottom: 40px;">
+                <h2>O que nossos clientes dizem</h2>
+                <p>Histórias de sucesso de empresas que transformaram suas finanças com nossa plataforma</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"O plano Profissional do FinancePro nos ajudou a reduzir custos em 22% e aumentar nossa margem de lucro. As automações e previsões financeiras são essenciais para nosso negócio."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="../img/testimonial-1.jpg" alt="Maria Silva" id="testimonial-1-placeholder">
+                        <div>
+                            <h4>Maria Silva</h4>
+                            <p>Café Aroma, Proprietária</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"Começamos com o plano Básico e rapidamente evoluímos para o Empresarial. A consultoria financeira mensal e o assistente IA são diferenciais que transformaram nosso negócio."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="../img/testimonial-2.jpg" alt="Sergio Santos" id="testimonial-2-placeholder">
+                        <div>
+                            <h4>Sergio Santos</h4>
+                            <p>Tech Solutions, CEO</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"O investimento no FinancePro se pagou em menos de 3 meses. A visibilidade financeira que ganhamos nos permitiu tomar decisões mais inteligentes e estratégicas."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="../img/testimonial-3.jpg" alt="Ana Oliveira" id="testimonial-3-placeholder">
+                        <div>
+                            <h4>Ana Oliveira</h4>
+                            <p>Boutique Elegance, Gerente</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section" style="background-color: #f5f6fa; padding: 50px 0;">
+        <div class="container">
+            <div class="faq-header">
+                <h2>Perguntas Frequentes sobre Planos</h2>
+                <p>Respostas para as dúvidas mais comuns sobre nossos planos e preços</p>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Posso mudar de plano a qualquer momento?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sim, você pode fazer upgrade ou downgrade do seu plano a qualquer momento. As mudanças entram em vigor imediatamente, e o valor será ajustado proporcionalmente ao tempo restante do seu ciclo de cobrança atual.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Existe alguma taxa de configuração?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Não, não cobramos nenhuma taxa de configuração ou ativação. Você paga apenas o valor do plano escolhido.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Como funciona o período de teste gratuito?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Todos os planos incluem um período de teste gratuito de 14 dias, durante o qual você tem acesso a todas as funcionalidades do plano escolhido. Não é necessário fornecer dados de pagamento para iniciar o teste. Ao final do período, você pode optar por continuar com o plano pago ou cancelar sem compromisso.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Posso cancelar a assinatura a qualquer momento?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sim, você pode cancelar sua assinatura a qualquer momento, sem taxas de cancelamento. O acesso à plataforma permanecerá ativo até o final do período pago.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Oferecem desconto para pagamento anual?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sim, oferecemos 20% de desconto para pagamentos anuais em todos os nossos planos. Você pode escolher entre pagamento mensal ou anual durante o processo de checkout.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Pronto para transformar as finanças do seu negócio?</h2>
+                <p>Comece hoje mesmo com 14 dias de teste gratuito. Sem compromisso.</p>
+                <div class="cta-buttons">
+                    <a href="payment.html?plan=pro" class="btn btn-primary">Começar Agora</a>
+                    <a href="#contact" class="btn btn-outline">Falar com um Consultor</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <div class="logo">
+                        <img src="../img/logo.png" alt="FinancePro Logo" id="footer-logo-placeholder">
+                        <h3>FinancePro</h3>
+                    </div>
+                    <p>Transformando a saúde financeira de pequenos negócios com tecnologia e inteligência.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Recursos</h3>
+                    <ul class="footer-links">
+                        <li><a href="../index.html#features">Plano AI Plus</a></li>
+                        <li><a href="../index.html#features">Automações</a></li>
+                        <li><a href="../index.html#features">Assistência Personalizada</a></li>
+                        <li><a href="../index.html#features">Dashboards</a></li>
+                        <li><a href="../index.html#features">Versão Mobile</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Empresa</h3>
+                    <ul class="footer-links">
+                        <li><a href="../index.html#about">Sobre nós</a></li>
+                        <li><a href="../index.html#testimonials">Depoimentos</a></li>
+                        <li><a href="../index.html#blog">Blog</a></li>
+                        <li><a href="../index.html#careers">Carreiras</a></li>
+                        <li><a href="../index.html#contact">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Suporte</h3>
+                    <ul class="footer-links">
+                        <li><a href="../index.html#help">Central de Ajuda</a></li>
+                        <li><a href="../index.html#faq">FAQ</a></li>
+                        <li><a href="../index.html#docs">Documentação</a></li>
+                        <li><a href="../index.html#community">Comunidade</a></li>
+                        <li><a href="../index.html#status">Status do Sistema</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 FinancePro. Todos os direitos reservados.</p>
+                <div class="footer-legal">
+                    <a href="#terms">Termos de Serviço</a>
+                    <a href="#privacy">Política de Privacidade</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dados Financeiros | Planej.AI</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" href="../img/favicon.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="../img/logo.png" alt="Planej.AI Logo">
+                <h1>Planej.AI</h1>
+            </div>
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav class="nav-links">
+                <a href="dashboard.html">Painel</a>
+                <a href="financial-data.html" class="active">Dados</a>
+                <a href="agent-chat.html">Agente</a>
+            </nav>
+            <div class="user-actions">
+                <div class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </div>
+                <div class="user-profile">
+                    <img src="../img/avatar.png" alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%;">
+                    <span>Olá, Sergio</span>
+                    <i class="fas fa-chevron-down" style="font-size: 0.8rem; margin-left: 5px;"></i>
+                    
+                    <!-- Dropdown Menu -->
+                    <div class="profile-dropdown">
+                        <ul>
+                            <li><a href="#"><i class="fas fa-user"></i> Meu Perfil</a></li>
+                            <li><a href="#"><i class="fas fa-cog"></i> Configurações</a></li>
+                            <li><a href="#"><i class="fas fa-credit-card"></i> Assinatura</a></li>
+                            <li><a href="#"><i class="fas fa-question-circle"></i> Ajuda</a></li>
+                            <li><a href="../index.html"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Financial Data Section -->
+    <section class="dashboard">
+        <div class="container">
+            <div class="dashboard-header">
+                <div class="dashboard-title">
+                    <h2>Dados Financeiros</h2>
+                    <p>Análise detalhada das suas finanças</p>
+                </div>
+                <div class="dashboard-actions">
+                    <span id="upload-status" style="display:block;margin-bottom:8px;color:#4a47a3;font-weight:500;"></span>
+                    <input type="file" id="csv-upload" accept=".csv" style="display:none">
+                    <button class="btn btn-primary" id="btn-adicionar-dados">Adicionar Dados</button>
+                </div>
+            </div>
+
+            <!-- Financial Health Score -->
+            <div class="card" style="margin-bottom: 30px;">
+                <div class="card-header">
+                    <div class="card-title">Índice de Saúde Financeira</div>
+                </div>
+                <div class="card-body">
+                    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 30px;">
+                        <div style="flex: 1; min-width: 200px; text-align: center;">
+                            <div style="width: 150px; height: 150px; border-radius: 50%; background: conic-gradient(var(--success-color) 0% 75%, #e0e0e0 75% 100%); margin: 0 auto; position: relative; display: flex; align-items: center; justify-content: center;">
+                                <div style="width: 120px; height: 120px; border-radius: 50%; background-color: var(--card-color); display: flex; align-items: center; justify-content: center; flex-direction: column;">
+                                    <span style="font-size: 2rem; font-weight: 700; color: var(--success-color);">75</span>
+                                    <span style="font-size: 0.9rem; color: var(--light-text);">de 100</span>
+                                </div>
+                            </div>
+                            <h3 style="margin-top: 15px; color: var(--success-color);">Bom</h3>
+                        </div>
+                        <div style="flex: 2; min-width: 300px;">
+                            <h3 style="margin-bottom: 15px;">Análise da Saúde Financeira</h3>
+                            <p style="margin-bottom: 20px;">Seu negócio está em boa situação financeira, mas há áreas que podem ser melhoradas para alcançar excelência.</p>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                                <div>
+                                    <h4 style="display: flex; align-items: center; margin-bottom: 10px;">
+                                        <i class="fas fa-check-circle" style="color: var(--success-color); margin-right: 10px;"></i>
+                                        Pontos Fortes
+                                    </h4>
+                                    <ul style="list-style: none; padding-left: 25px;">
+                                        <li style="margin-bottom: 5px;">Boa margem de lucro (28%)</li>
+                                        <li style="margin-bottom: 5px;">Crescimento consistente de receita</li>
+                                        <li style="margin-bottom: 5px;">Baixo nível de endividamento</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 style="display: flex; align-items: center; margin-bottom: 10px;">
+                                        <i class="fas fa-exclamation-circle" style="color: var(--warning-color); margin-right: 10px;"></i>
+                                        Áreas de Melhoria
+                                    </h4>
+                                    <ul style="list-style: none; padding-left: 25px;">
+                                        <li style="margin-bottom: 5px;">Prazo médio de recebimento elevado</li>
+                                        <li style="margin-bottom: 5px;">Alto nível de estoque</li>
+                                        <li style="margin-bottom: 5px;">Despesas operacionais crescentes</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Financial Reports -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Relatórios Financeiros</div>
+                    <!-- Botão removido -->
+                </div>
+                <div class="card-body">
+                    <div class="transactions-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Cliente/Fornecedor</th>
+                                    <th>Descrição</th>
+                                    <th>Categoria</th>
+                                    <th>Valor (R$)</th>
+                                    <th>Tipo</th>
+                                    <th>Forma de Pagamento</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="financial-records-tbody">
+                                <!-- Registros serão inseridos via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+// Upload CSV direto do botão
+const btn = document.getElementById('btn-adicionar-dados');
+const fileInput = document.getElementById('csv-upload');
+const statusSpan = document.getElementById('upload-status');
+if(btn && fileInput) {
+  btn.addEventListener('click', function(e) {
+    e.preventDefault();
+    fileInput.value = '';
+    fileInput.click();
+  });
+  fileInput.addEventListener('change', async function() {
+    if (!fileInput.files.length) return;
+    const formData = new FormData();
+    formData.append('file', fileInput.files[0]);
+    statusSpan.textContent = 'Enviando...';
+    try {
+      const resp = await fetch('http://127.0.0.1:8000/users/upload-csv-vectorstore/', {
+        method: 'POST',
+        body: formData
+      });
+      const text = await resp.text();
+      statusSpan.textContent = 'Status: ' + resp.status + ' - ' + (resp.ok ? 'Sucesso!' : text);
+    } catch (err) {
+      statusSpan.textContent = 'Erro: ' + err;
+    }
+  });
+}
+
+// Preencher tabela de Relatórios Financeiros com os 6 últimos registros
+async function carregarUltimosRegistros() {
+    try {
+        const resp = await fetch('http://127.0.0.1:8000/users/financial-records/');
+        const data = await resp.json();
+        const tbody = document.getElementById('financial-records-tbody');
+        tbody.innerHTML = '';
+        data.slice(0, 6).forEach(registro => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${registro['Data'] || ''}</td>
+                <td>${registro['Cliente/Fornecedor'] || ''}</td>
+                <td>${registro['Descrição'] || ''}</td>
+                <td>${registro['Categoria'] || ''}</td>
+                <td>${registro['Valor (R$)'] || ''}</td>
+                <td>${registro['Tipo'] || ''}</td>
+                <td>${registro['Forma de Pagamento'] || ''}</td>
+                <td>${registro['Status'] || ''}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+    } catch (err) {
+        // Em caso de erro, não mostra nada
+    }
+}
+if(document.getElementById('financial-records-tbody')) carregarUltimosRegistros();
+</script>
+</body>
+</html>

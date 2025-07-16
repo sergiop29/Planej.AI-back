@@ -24,3 +24,17 @@ class Message(models.Model):
 
     def __str__(self):
         return f"{self.sender}: {self.text[:30]}..."
+
+class FinancialRecord(models.Model):
+    data = models.CharField(max_length=50, blank=True)
+    cliente_fornecedor = models.CharField(max_length=255, blank=True)
+    descricao = models.CharField(max_length=255, blank=True)
+    categoria = models.CharField(max_length=100, blank=True)
+    valor = models.CharField(max_length=50, blank=True)
+    tipo = models.CharField(max_length=50, blank=True)
+    forma_pagamento = models.CharField(max_length=100, blank=True)
+    status = models.CharField(max_length=50, blank=True)
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.data} - {self.descricao} - {self.valor}"
