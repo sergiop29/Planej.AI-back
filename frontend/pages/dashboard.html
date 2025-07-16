@@ -14,7 +14,7 @@
     <header>
         <div class="container header-container">
             <div class="logo">
-                <img src="../img/logo.png" alt="Planej.AI Logo">
+                <img src="../img/owl-logo.png" alt="Planej.AI Logo">
                 <h1>Planej.AI</h1>
             </div>
             <div class="mobile-menu-toggle">
@@ -54,8 +54,8 @@
         <div class="container">
             <div class="dashboard-header">
                 <div class="dashboard-title">
-                    <h2>Painel Financeiro</h2>
-                    <p>Visão geral da saúde financeira do seu negócio</p>
+                    <h2>Dashboard Financeiro</h2>
+                    <p>Tenha a visão da saúde financeira do seu negócio</p>
                 </div>
                 <div class="dashboard-actions">
                     <button class="btn btn-primary" onclick="exportToPDF()"><i class="fas fa-file-pdf"></i> Exportar Relatório</button>
@@ -169,14 +169,12 @@
                 <!-- Forecast permanece igual -->
                 <div class="card" style="flex: 1; min-width: 300px; margin-bottom: 0;">
                     <div class="card-header">
-                        <div class="card-title">Previsão Financeira</div>
-                        <div class="card-actions">
-                            <button class="btn btn-sm btn-outline">Detalhes</button>
-                        </div>
+                        <div class="card-title">Ponto de Equilíbrio</div>
+                        <!-- Botão de detalhes removido -->
                     </div>
                     <div class="card-body">
                         <div class="chart-container">
-                            <canvas id="forecastChart"></canvas>
+                            <canvas id="breakEvenChart"></canvas>
                         </div>
                     </div>
                 </div>
@@ -383,63 +381,14 @@ async function carregarGraficoDistribuicaoCategoria() {
 }
 carregarGraficoDistribuicaoCategoria();
 
-async function carregarGraficoFluxoCaixaDashboard(anoSelecionado) {
-    try {
-        const resp = await fetch('http://127.0.0.1:8000/users/cash-flow/');
-        const data = await resp.json();
-        // Filtrar por ano
-        const ano = anoSelecionado || (data.labels.length > 0 ? data.labels[data.labels.length-1].slice(0,4) : '2025');
-        const indices = data.labels.map((label, i) => label.startsWith(ano) ? i : -1).filter(i => i !== -1);
-        const labelsFiltrados = indices.map(i => data.labels[i]);
-        const fluxoFiltrado = indices.map(i => data.fluxo_caixa[i]);
-        // Converter YYYY-MM para nome do mês
-        const meses = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
-        const labelsMeses = labelsFiltrados.map(l => meses[parseInt(l.slice(5,7), 10)-1]);
-        // Definir cor de cada barra
-        const verde = getComputedStyle(document.documentElement).getPropertyValue('--success-color');
-        const vermelho = getComputedStyle(document.documentElement).getPropertyValue('--warning-color');
-        const cores = fluxoFiltrado.map(v => v < 0 ? vermelho : verde);
-        // Destruir gráfico anterior se existir
-        if(window.cashFlowChartInstance) window.cashFlowChartInstance.destroy();
-        const ctx = document.getElementById('cashFlowChart').getContext('2d');
-        window.cashFlowChartInstance = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: labelsMeses,
-                datasets: [{
-                    label: 'Fluxo de Caixa',
-                    data: fluxoFiltrado,
-                    backgroundColor: cores,
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: { display: false },
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            callback: function(value) {
-                                return 'R$ ' + value.toLocaleString('pt-BR');
-                            }
-                        }
-                    }
-                }
-            }
-        });
-    } catch (err) {
-        // Em caso de erro, não mostra nada
-    }
-}
 const selectAnoFluxoDashboard = document.getElementById('ano-fluxo-dashboard');
 if(selectAnoFluxoDashboard) {
     selectAnoFluxoDashboard.addEventListener('change', function() {
-        carregarGraficoFluxoCaixaDashboard(this.value);
+        window.carregarGraficoFluxoCaixaGlobal('cashFlowChart', this.value);
     });
-    carregarGraficoFluxoCaixaDashboard(selectAnoFluxoDashboard.value);
+    window.carregarGraficoFluxoCaixaGlobal('cashFlowChart', selectAnoFluxoDashboard.value);
 }
+window.carregarGraficoBreakEven('breakEvenChart');
 </script>
 </body>
 </html>

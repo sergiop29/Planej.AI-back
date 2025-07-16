@@ -117,6 +117,10 @@ class FinancialRecordListView(APIView):
         ]
         return Response(data)
 
+    def delete(self, request):
+        FinancialRecord.objects.all().delete()
+        return Response({'message': 'Todos os registros financeiros foram excluídos com sucesso!'}, status=204)
+
 class FinancialIndicatorsView(APIView):
     permission_classes = [AllowAny]
     def get(self, request):

@@ -14,7 +14,7 @@
     <header>
         <div class="container header-container">
             <div class="logo">
-                <img src="../img/logo.png" alt="Planej.AI Logo">
+                <img src="../img/owl-logo.png" alt="Planej.AI Logo">
                 <h1>Planej.AI</h1>
             </div>
             <div class="mobile-menu-toggle">
@@ -55,12 +55,13 @@
             <div class="dashboard-header">
                 <div class="dashboard-title">
                     <h2>Dados Financeiros</h2>
-                    <p>Análise detalhada das suas finanças</p>
+                    <p>Importe e Exporte os dados do seu negócio</p>
                 </div>
                 <div class="dashboard-actions">
                     <span id="upload-status" style="display:block;margin-bottom:8px;color:#4a47a3;font-weight:500;"></span>
                     <input type="file" id="csv-upload" accept=".csv" style="display:none">
                     <button class="btn btn-primary" id="btn-adicionar-dados">Adicionar Dados</button>
+                    <button class="btn btn-secondary" id="btn-excluir-todos"><i class='fas fa-trash-alt'></i> Excluir Todos os Dados</button>
                 </div>
             </div>
 
@@ -74,22 +75,22 @@
                         <div style="flex: 1; min-width: 200px; text-align: center;">
                             <div style="width: 150px; height: 150px; border-radius: 50%; background: conic-gradient(var(--success-color) 0% 75%, #e0e0e0 75% 100%); margin: 0 auto; position: relative; display: flex; align-items: center; justify-content: center;">
                                 <div style="width: 120px; height: 120px; border-radius: 50%; background-color: var(--card-color); display: flex; align-items: center; justify-content: center; flex-direction: column;">
-                                    <span style="font-size: 2rem; font-weight: 700; color: var(--success-color);">75</span>
+                                    <span id="indice-saude-valor" style="font-size: 2rem; font-weight: 700; color: var(--success-color);">75</span>
                                     <span style="font-size: 0.9rem; color: var(--light-text);">de 100</span>
                                 </div>
                             </div>
-                            <h3 style="margin-top: 15px; color: var(--success-color);">Bom</h3>
+                            <h3 id="indice-saude-label" style="margin-top: 15px; color: var(--success-color);">Bom</h3>
                         </div>
                         <div style="flex: 2; min-width: 300px;">
                             <h3 style="margin-bottom: 15px;">Análise da Saúde Financeira</h3>
-                            <p style="margin-bottom: 20px;">Seu negócio está em boa situação financeira, mas há áreas que podem ser melhoradas para alcançar excelência.</p>
+                            <p id="indice-saude-analise" style="margin-bottom: 20px;">Seu negócio está em boa situação financeira, mas há áreas que podem ser melhoradas para alcançar excelência.</p>
                             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
                                 <div>
                                     <h4 style="display: flex; align-items: center; margin-bottom: 10px;">
                                         <i class="fas fa-check-circle" style="color: var(--success-color); margin-right: 10px;"></i>
                                         Pontos Fortes
                                     </h4>
-                                    <ul style="list-style: none; padding-left: 25px;">
+                                    <ul id="indice-saude-pontos-fortes" style="list-style: none; padding-left: 25px;">
                                         <li style="margin-bottom: 5px;">Boa margem de lucro (28%)</li>
                                         <li style="margin-bottom: 5px;">Crescimento consistente de receita</li>
                                         <li style="margin-bottom: 5px;">Baixo nível de endividamento</li>
@@ -100,7 +101,7 @@
                                         <i class="fas fa-exclamation-circle" style="color: var(--warning-color); margin-right: 10px;"></i>
                                         Áreas de Melhoria
                                     </h4>
-                                    <ul style="list-style: none; padding-left: 25px;">
+                                    <ul id="indice-saude-melhorias" style="list-style: none; padding-left: 25px;">
                                         <li style="margin-bottom: 5px;">Prazo médio de recebimento elevado</li>
                                         <li style="margin-bottom: 5px;">Alto nível de estoque</li>
                                         <li style="margin-bottom: 5px;">Despesas operacionais crescentes</li>
@@ -201,6 +202,26 @@ async function carregarUltimosRegistros() {
     }
 }
 if(document.getElementById('financial-records-tbody')) carregarUltimosRegistros();
+
+const btnExcluirTodos = document.getElementById('btn-excluir-todos');
+if(btnExcluirTodos) {
+  btnExcluirTodos.addEventListener('click', async function() {
+    if (!confirm('Tem certeza que deseja excluir TODOS os dados financeiros? Esta ação não pode ser desfeita.')) return;
+    try {
+      const resp = await fetch('http://127.0.0.1:8000/users/financial-records/', {
+        method: 'DELETE'
+      });
+      if (resp.ok) {
+        alert('Todos os dados foram excluídos com sucesso!');
+        carregarUltimosRegistros();
+      } else {
+        alert('Erro ao excluir os dados.');
+      }
+    } catch (err) {
+      alert('Erro ao excluir os dados: ' + err);
+    }
+  });
+}
 </script>
 </body>
 </html>

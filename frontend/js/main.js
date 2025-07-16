@@ -451,3 +451,199 @@ function addChatMessage(message, isUser = false, isLoading = false) {
         <span class="dot"></span>
       </span>
     `}}
+
+// Função utilitária global para carregar gráfico de fluxo de caixa
+window.carregarGraficoFluxoCaixaGlobal = async function(canvasId, anoSelecionado) {
+    try {
+        const resp = await fetch('http://127.0.0.1:8000/users/cash-flow/');
+        const data = await resp.json();
+        // Filtrar por ano
+        const ano = anoSelecionado || (data.labels.length > 0 ? data.labels[data.labels.length-1].slice(0,4) : '2025');
+        const indices = data.labels.map((label, i) => label.startsWith(ano) ? i : -1).filter(i => i !== -1);
+        const labelsFiltrados = indices.map(i => data.labels[i]);
+        const fluxoFiltrado = indices.map(i => data.fluxo_caixa[i]);
+        // Converter YYYY-MM para nome do mês
+        const meses = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+        const labelsMeses = labelsFiltrados.map(l => meses[parseInt(l.slice(5,7), 10)-1]);
+        // Definir cor de cada barra
+        const verde = getComputedStyle(document.documentElement).getPropertyValue('--success-color');
+        const vermelho = getComputedStyle(document.documentElement).getPropertyValue('--warning-color');
+        const cores = fluxoFiltrado.map(v => v < 0 ? vermelho : verde);
+        // Destruir gráfico anterior se existir
+        if(window[canvasId + 'Instance']) window[canvasId + 'Instance'].destroy();
+        const ctx = document.getElementById(canvasId).getContext('2d');
+        window[canvasId + 'Instance'] = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labelsMeses,
+                datasets: [{
+                    label: 'Fluxo de Caixa',
+                    data: fluxoFiltrado,
+                    backgroundColor: cores,
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false },
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return 'R$ ' + value.toLocaleString('pt-BR');
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    } catch (err) {
+        // Em caso de erro, não mostra nada
+    }
+}
+
+// Função para exibir gráfico de ponto de equilíbrio contábil por unidades vendidas
+window.carregarGraficoBreakEven = async function(canvasId) {
+    try {
+        // Buscar todas as receitas (vendas) do banco
+        const resp = await fetch('http://127.0.0.1:8000/users/financial-records/');
+        const data = await resp.json();
+        // Filtrar apenas receitas
+        const vendas = data.filter(r => r['Tipo'] && r['Tipo'].toLowerCase() === 'receita');
+        // Eixo X: unidades vendidas (1, 2, 3, ...)
+        const unidades = vendas.map((_, i) => i + 1);
+        // Receita acumulada
+        let receitaAcumulada = 0;
+        const receitas = vendas.map(v => {
+            const valor = parseFloat(String(v['Valor (R$)']).replace('.', '').replace(',', '.')) || 0;
+            receitaAcumulada += valor;
+            return receitaAcumulada;
+        });
+        // Buscar custos totais (fixos + variáveis) da API de indicadores financeiros
+        const respIndicadores = await fetch('http://127.0.0.1:8000/users/financial-indicators/');
+        const indicadores = await respIndicadores.json();
+        const custoTotal = indicadores.gastos || 0;
+        const custosTotais = unidades.map(() => custoTotal);
+        // Encontrar o ponto de equilíbrio (primeira unidade onde receita acumulada >= custo total)
+        let breakEvenIndex = receitas.findIndex(r => r >= custoTotal);
+        let breakEvenX = breakEvenIndex !== -1 ? breakEvenIndex : null;
+        let breakEvenY = breakEvenIndex !== -1 ? receitas[breakEvenIndex] : null;
+        // Destruir gráfico anterior se existir
+        if(window[canvasId + 'Instance']) window[canvasId + 'Instance'].destroy();
+        const ctx = document.getElementById(canvasId).getContext('2d');
+        window[canvasId + 'Instance'] = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: unidades, // apenas o número da unidade, mas não será exibido
+                datasets: [
+                    {
+                        label: 'Receita Acumulada',
+                        data: receitas,
+                        borderColor: getComputedStyle(document.documentElement).getPropertyValue('--success-color'),
+                        backgroundColor: 'transparent',
+                        tension: 0.1,
+                        pointRadius: 2
+                    },
+                    {
+                        label: 'Custo Total',
+                        data: custosTotais,
+                        borderColor: getComputedStyle(document.documentElement).getPropertyValue('--warning-color'),
+                        backgroundColor: 'transparent',
+                        borderDash: [5,5],
+                        tension: 0.1,
+                        pointRadius: 0
+                    },
+                    // Adiciona o ponto de equilíbrio apenas se existir
+                    ...(breakEvenIndex !== -1 ? [{
+                        label: 'Ponto de Equilíbrio',
+                        data: unidades.map((u, i) => (i === breakEvenIndex ? breakEvenY : null)),
+                        borderColor: getComputedStyle(document.documentElement).getPropertyValue('--primary-color'),
+                        backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--primary-color'),
+                        pointRadius: 7,
+                        type: 'scatter',
+                        showLine: false,
+                        order: 3
+                    }] : [])
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'top' },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                if(context.dataset.label === 'Ponto de Equilíbrio') {
+                                    return 'Ponto de Equilíbrio: ' + (breakEvenIndex+1) + ' unidades';
+                                }
+                                return context.dataset.label + ': R$ ' + context.raw.toLocaleString('pt-BR');
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return 'R$ ' + value.toLocaleString('pt-BR');
+                            }
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Unidades Vendidas'
+                        },
+                        ticks: {
+                            callback: function() { return ''; }
+                        }
+                    }
+                }
+            }
+        });
+    } catch (err) {
+        // Em caso de erro, não mostra nada
+    }
+}
+
+async function atualizarIndiceSaudeFinanceira() {
+  try {
+    // Aqui você pode customizar a pergunta para o agente de IA
+    const pergunta = 'Analise meus dados financeiros e me dê um índice de saúde financeira (de 0 a 100), um rótulo (ex: Bom, Ruim, Excelente), um texto explicativo, uma lista de pontos fortes e uma lista de áreas de melhoria.';
+    const resp = await fetch('http://127.0.0.1:8000/users/financial-agent/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ question: pergunta })
+    });
+    const data = await resp.json();
+    // Espera-se que a resposta do agente seja um JSON estruturado. Se vier texto, tente fazer o parse.
+    let resultado = {};
+    try {
+      resultado = typeof data.resposta === 'string' ? JSON.parse(data.resposta) : data.resposta;
+    } catch {
+      // Se não for JSON, apenas mostra o texto na análise
+      resultado = { analise: data.resposta };
+    }
+    // Atualizar valores na tela
+    if (resultado.indice !== undefined) {
+      document.getElementById('indice-saude-valor').textContent = resultado.indice;
+    }
+    if (resultado.label) {
+      document.getElementById('indice-saude-label').textContent = resultado.label;
+    }
+    if (resultado.analise) {
+      document.getElementById('indice-saude-analise').textContent = resultado.analise;
+    }
+    if (Array.isArray(resultado.pontos_fortes)) {
+      document.getElementById('indice-saude-pontos-fortes').innerHTML = resultado.pontos_fortes.map(p => `<li style='margin-bottom:5px;'>${p}</li>`).join('');
+    }
+    if (Array.isArray(resultado.melhorias)) {
+      document.getElementById('indice-saude-melhorias').innerHTML = resultado.melhorias.map(m => `<li style='margin-bottom:5px;'>${m}</li>`).join('');
+    }
+  } catch (err) {
+    document.getElementById('indice-saude-analise').textContent = 'Não foi possível obter a análise da IA.';
+  }
+}
