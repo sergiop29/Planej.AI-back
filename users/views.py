@@ -25,6 +25,7 @@ import pickle
 from django.db.models import Q
 from django.db.models.functions import TruncMonth
 from collections import defaultdict
+from rest_framework.decorators import api_view
 
 # Create your views here.
 
@@ -336,3 +337,85 @@ class UploadCSVVectorstoreView(APIView):
             return Response({'message': f'{registros_criados} registros financeiros salvos com sucesso no banco de dados local!'}, status=201)
         except Exception as e:
             return Response({'error': str(e)}, status=500)
+
+def analisar_financeiro_llm(prompt):
+    openai_api_key = os.getenv('OPENAI_API_KEY', 'SUA_CHAVE_AQUI')
+    llm = OpenAI(openai_api_key=openai_api_key, temperature=0.2)
+    try:
+        resposta = llm.predict(prompt)
+        return resposta
+    except Exception as e:
+        return None
+
+@api_view(['GET'])
+def indice_saude(request):
+    # Prompt para nota de 0 a 100 e label
+    prompt = (
+        "Analise todos os dados financeiros do banco de dados e responda apenas com um JSON no formato: {\"indice\": <nota de 0 a 100>, \"label\": <rótulo curto como Bom, Ruim, Excelente, Regular, etc>}"
+    )
+    resposta = analisar_financeiro_llm(prompt)
+    import json
+    try:
+        return Response(json.loads(resposta))
+    except:
+        return Response({'indice': 0, 'label': 'Desconhecido'})
+
+@api_view(['GET'])
+def analise_saude(request):
+    # Prompt para texto breve
+    prompt = (
+        "Analise todos os dados financeiros do banco de dados e responda apenas com um texto de no máximo 30 palavras, explicando de forma simples a situação financeira da empresa."
+    )
+    resposta = analisar_financeiro_llm(prompt)
+    texto = resposta.strip() if resposta else ''
+    if not texto:
+        texto = 'Não foi possível analisar a situação financeira.'
+    return Response({'analise': texto})
+
+@api_view(['GET'])
+def pontos_fortes(request):
+    # Prompt para pontos fortes (apenas 2 frases)
+    prompt = (
+        "Analise todos os dados financeiros do banco de dados e responda apenas com um JSON no formato: {\"pontos_fortes\": [duas frases curtas, cada uma representando um ponto forte]}"
+    )
+    resposta = analisar_financeiro_llm(prompt)
+    import json
+    try:
+        data = json.loads(resposta)
+        # Garante que só venham 2 frases
+        if isinstance(data.get('pontos_fortes'), list):
+            data['pontos_fortes'] = data['pontos_fortes'][:2]
+        return Response(data)
+    except:
+        return Response({'pontos_fortes': []})
+
+@api_view(['GET'])
+def pontos_fracos(request):
+    # Prompt para pontos fracos (apenas 2 frases)
+    prompt = (
+        "Analise todos os dados financeiros do banco de dados e responda apenas com um JSON no formato: {\"melhorias\": [duas frases curtas, cada uma representando um ponto fraco ou sugestão de melhoria]}"
+    )
+    resposta = analisar_financeiro_llm(prompt)
+    import json
+    try:
+        data = json.loads(resposta)
+        # Garante que só venham 2 frases
+        if isinstance(data.get('melhorias'), list):
+            data['melhorias'] = data['melhorias'][:2]
+        return Response(data)
+    except:
+        return Response({'melhorias': []})
+
+@api_view(['GET'])
+def nota_saude(request):
+    prompt = (
+        "Analise todos os dados financeiros do banco de dados e responda apenas com um número de 0 a 100, representando a nota de saúde financeira da empresa. Não escreva mais nada além do número."
+    )
+    resposta = analisar_financeiro_llm(prompt)
+    try:
+        nota = int(float(resposta.strip()))
+        if nota < 0: nota = 0
+        if nota > 100: nota = 100
+    except:
+        nota = 0
+    return Response({'nota': nota})

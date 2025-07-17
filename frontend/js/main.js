@@ -92,6 +92,8 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Inicializar animação de contagem nos valores estatísticos
   initCountAnimation();
+
+  atualizarIndiceSaudeFinanceira();
 });
 
 
@@ -611,39 +613,57 @@ window.carregarGraficoBreakEven = async function(canvasId) {
 
 async function atualizarIndiceSaudeFinanceira() {
   try {
-    // Aqui você pode customizar a pergunta para o agente de IA
-    const pergunta = 'Analise meus dados financeiros e me dê um índice de saúde financeira (de 0 a 100), um rótulo (ex: Bom, Ruim, Excelente), um texto explicativo, uma lista de pontos fortes e uma lista de áreas de melhoria.';
-    const resp = await fetch('http://127.0.0.1:8000/users/financial-agent/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ question: pergunta })
-    });
-    const data = await resp.json();
-    // Espera-se que a resposta do agente seja um JSON estruturado. Se vier texto, tente fazer o parse.
-    let resultado = {};
-    try {
-      resultado = typeof data.resposta === 'string' ? JSON.parse(data.resposta) : data.resposta;
-    } catch {
-      // Se não for JSON, apenas mostra o texto na análise
-      resultado = { analise: data.resposta };
+    // 1. Buscar a nota da IA
+    const respNota = await fetch('http://127.0.0.1:8000/users/nota-saude/', { method: 'GET' });
+    const dataNota = await respNota.json();
+    const notaSaude = dataNota.nota;
+    document.getElementById('indice-saude-valor').textContent = notaSaude;
+    const loaderNota = document.getElementById('loader-indice-saude-valor');
+    if (loaderNota) loaderNota.remove();
+    // Atualizar o círculo do gráfico
+    const circulo = document.getElementById('circulo-indice-saude');
+    if (circulo) {
+      circulo.style.background = `conic-gradient(var(--success-color) 0% ${notaSaude}%, #e0e0e0 ${notaSaude}% 100%)`;
     }
-    // Atualizar valores na tela
-    if (resultado.indice !== undefined) {
-      document.getElementById('indice-saude-valor').textContent = resultado.indice;
+
+    // 2. Breve texto sobre a situação financeira
+    const respTexto = await fetch('http://127.0.0.1:8000/users/analise-saude/', { method: 'GET' });
+    const dataTexto = await respTexto.json();
+    document.getElementById('indice-saude-analise').textContent = dataTexto.analise || '';
+    const loaderAnalise = document.getElementById('loader-indice-saude-analise');
+    if (loaderAnalise) loaderAnalise.remove();
+
+    // 3. Pontos fortes
+    const respFortes = await fetch('http://127.0.0.1:8000/users/pontos-fortes/', { method: 'GET' });
+    const dataFortes = await respFortes.json();
+    if (Array.isArray(dataFortes.pontos_fortes)) {
+      document.getElementById('indice-saude-pontos-fortes').innerHTML = dataFortes.pontos_fortes.map(p => `<li style='margin-bottom:5px;'>${p}</li>`).join('');
     }
-    if (resultado.label) {
-      document.getElementById('indice-saude-label').textContent = resultado.label;
+    const loaderFortes = document.getElementById('loader-indice-saude-pontos-fortes');
+    if (loaderFortes) loaderFortes.remove();
+
+    // 4. Pontos fracos
+    const respFracos = await fetch('http://127.0.0.1:8000/users/pontos-fracos/', { method: 'GET' });
+    const dataFracos = await respFracos.json();
+    if (Array.isArray(dataFracos.melhorias)) {
+      document.getElementById('indice-saude-melhorias').innerHTML = dataFracos.melhorias.map(m => `<li style='margin-bottom:5px;'>${m}</li>`).join('');
     }
-    if (resultado.analise) {
-      document.getElementById('indice-saude-analise').textContent = resultado.analise;
-    }
-    if (Array.isArray(resultado.pontos_fortes)) {
-      document.getElementById('indice-saude-pontos-fortes').innerHTML = resultado.pontos_fortes.map(p => `<li style='margin-bottom:5px;'>${p}</li>`).join('');
-    }
-    if (Array.isArray(resultado.melhorias)) {
-      document.getElementById('indice-saude-melhorias').innerHTML = resultado.melhorias.map(m => `<li style='margin-bottom:5px;'>${m}</li>`).join('');
-    }
+    const loaderFracos = document.getElementById('loader-indice-saude-melhorias');
+    if (loaderFracos) loaderFracos.remove();
+
+    // (Opcional) label
+    const loaderLabel = document.getElementById('loader-indice-saude-label');
+    if (loaderLabel) loaderLabel.remove();
+    // document.getElementById('indice-saude-label').textContent = ...
   } catch (err) {
     document.getElementById('indice-saude-analise').textContent = 'Não foi possível obter a análise da IA.';
+    // Remover skeletons em caso de erro
+    [
+      'loader-indice-saude-valor',
+      'loader-indice-saude-label',
+      'loader-indice-saude-analise',
+      'loader-indice-saude-pontos-fortes',
+      'loader-indice-saude-melhorias'
+    ].forEach(id => { const el = document.getElementById(id); if (el) el.remove(); });
   }
 }
