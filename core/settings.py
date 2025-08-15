@@ -78,12 +78,8 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'planejai_db',
-        'USER': 'admin',
-        'PASSWORD': 'Planejai25',
-        'HOST': 'localhost',
-        'PORT': '5433',  # Troque para 5433
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3', # Isso vai criar um arquivo de banco de dados no seu projeto
     }
 }
 

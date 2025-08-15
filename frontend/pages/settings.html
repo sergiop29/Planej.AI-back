@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações | Planej.AI</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" href="../img/favicon.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="../img/logo.png" alt="Planej.AI Logo">
+                <h1>Planej.AI</h1>
+            </div>
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav class="nav-links">
+                <a href="dashboard.html">Painel</a>
+                <a href="financial-data.html">Dados</a>
+                <a href="agent-chat.html">Agente</a>
+            </nav>
+            <div class="user-actions">
+                <div class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </div>
+                <div class="user-profile">
+                    <img src="../img/avatar.png" alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%;">
+                    <span>Olá, João</span>
+                    <i class="fas fa-chevron-down" style="font-size: 0.8rem; margin-left: 5px;"></i>
+                    
+                    <!-- Dropdown Menu -->
+                    <div class="profile-dropdown">
+                        <ul>
+                            <li><a href="profile.html"><i class="fas fa-user"></i> Meu Perfil</a></li>
+                            <li><a href="settings.html" class="active"><i class="fas fa-cog"></i> Configurações</a></li>
+                            <li><a href="subscription.html"><i class="fas fa-credit-card"></i> Assinatura</a></li>
+                            <li><a href="help.html"><i class="fas fa-question-circle"></i> Ajuda</a></li>
+                            <li><a href="../index.html"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Settings Section -->
+    <section class="dashboard">
+        <div class="container">
+            <div class="dashboard-header">
+                <div class="dashboard-title">
+                    <h2>Configurações</h2>
+                    <p>Personalize sua experiência na plataforma</p>
+                </div>
+                <div class="dashboard-actions">
+                    <button class="btn btn-primary">Salvar Alterações</button>
+                </div>
+            </div>
+
+            <!-- Settings Tabs -->
+            <div style="display: flex; flex-wrap: wrap; gap: 30px; margin-bottom: 30px;">
+                <div style="flex: 1; min-width: 200px; max-width: 250px;">
+                    <div class="card">
+                        <div class="card-body" style="padding: 0;">
+                            <div style="border-bottom: 1px solid var(--border-color); padding: 15px 20px;">
+                                <h3 style="margin: 0; font-size: 1.1rem;">Configurações</h3>
+                            </div>
+                            <ul style="list-style: none; padding: 0; margin: 0;">
+                                <li style="border-bottom: 1px solid var(--border-color);">
+                                    <a href="#" class="active" style="display: block; padding: 15px 20px; color: var(--primary-color); text-decoration: none; font-weight: 500;">
+                                        <i class="fas fa-palette" style="margin-right: 10px;"></i> Aparência
+                                    </a>
+                                </li>
+                                <li style="border-bottom: 1px solid var(--border-color);">
+                                    <a href="#" style="display: block; padding: 15px 20px; color: var(--text-color); text-decoration: none;">
+                                        <i class="fas fa-bell" style="margin-right: 10px;"></i> Notificações
+                                    </a>
+                                </li>
+                                <li style="border-bottom: 1px solid var(--border-color);">
+                                    <a href="#" style="display: block; padding: 15px 20px; color: var(--text-color); text-decoration: none;">
+                                        <i class="fas fa-lock" style="margin-right: 10px;"></i> Privacidade e Segurança
+                                    </a>
+                                </li>
+                                <li style="border-bottom: 1px solid var(--border-color);">
+                                    <a href="#" style="display: block; padding: 15px 20px; color: var(--text-color); text-decoration: none;">
+                                        <i class="fas fa-language" style="margin-right: 10px;"></i> Idioma e Região
+                                    </a>
+                                </li>
+                                <li style="border-bottom: 1px solid var(--border-color);">
+                                    <a href="#" style="display: block; padding: 15px 20px; color: var(--text-color); text-decoration: none;">
+                                        <i class="fas fa-chart-pie" style="margin-right: 10px;"></i> Preferências de Dados
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" style="display: block; padding: 15px 20px; color: var(--text-color); text-decoration: none;">
+                                        <i class="fas fa-sync-alt" style="margin-right: 10px;"></i> Sincronização
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="flex: 3; min-width: 300px;">
+                    <!-- Appearance Settings -->
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Aparência</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>Tema</label>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; margin-top: 15px;">
+                                    <div style="border: 2px solid var(--primary-color); border-radius: 10px; overflow: hidden; cursor: pointer;">
+                                        <div style="height: 100px; background-color: #ffffff; display: flex; align-items: center; justify-content: center;">
+                                            <div style="width: 80%; height: 70%; background-color: #f5f5f5; border-radius: 8px; position: relative;">
+                                                <div style="position: absolute; top: 10px; left: 10px; width: 60%; height: 10px; background-color: #4a47a3; border-radius: 3px;"></div>
+                                                <div style="position: absolute; top: 30px; left: 10px; width: 40%; height: 10px; background-color: #4a47a3; border-radius: 3px;"></div>
+                                                <div style="position: absolute; top: 50px; left: 10px; width: 70%; height: 10px; background-color: #4a47a3; border-radius: 3px;"></div>
+                                            </div>
+                                        </div>
+                                        <div style="padding: 10px; text-align: center; background-color: #f5f5f5;">
+                                            <span style="font-weight: 500;">Claro</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div style="border: 2px solid var(--border-color); border-radius: 10px; overflow: hidden; cursor: pointer;">
+                                        <div style="height: 100px; background-color: #1a1a2e; display: flex; align-items: center; justify-content: center;">
+                                            <div style="width: 80%; height: 70%; background-color: #16213e; border-radius: 8px; position: relative;">
+                                                <div style="position: absolute; top: 10px; left: 10px; width: 60%; height: 10px; background-color: #4a47a3; border-radius: 3px;"></div>
+                                                <div style="position: absolute; top: 30px; left: 10px; width: 40%; height: 10px; background-color: #4a47a3; border-radius: 3px;"></div>
+                                                <div style="position: absolute; top: 50px; left: 10px; width: 70%; height: 10px; background-color: #4a47a3; border-radius: 3px;"></div>
+                                            </div>
+                                        </div>
+                                        <div style="padding: 10px; text-align: center; background-color: #16213e; color: white;">
+                                            <span style="font-weight: 500;">Escuro</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div style="border: 2px solid var(--border-color); border-radius: 10px; overflow: hidden; cursor: pointer;">
+                                        <div style="height: 100px; background: linear-gradient(to right, #ffffff 50%, #1a1a2e 50%); display: flex; align-items: center; justify-content: center;">
+                                            <div style="width: 80%; height: 70%; background: linear-gradient(to right, #f5f5f5 50%, #16213e 50%); border-radius: 8px; position: relative;">
+                                                <div style="position: absolute; top: 10px; left: 10px; width: 60%; height: 10px; background-color: #4a47a3; border-radius: 3px;"></div>
+                                                <div style="position: absolute; top: 30px; left: 10px; width: 40%; height: 10px; background-color: #4a47a3; border-radius: 3px;"></div>
+                                                <div style="position: absolute; top: 50px; left: 10px; width: 70%; height: 10px; background-color: #4a47a3; border-radius: 3px;"></div>
+                                            </div>
+                                        </div>
+                                        <div style="padding: 10px; text-align: center; background: linear-gradient(to right, #f5f5f5 50%, #16213e 50%); color: #333;">
+                                            <span style="font-weight: 500; background: linear-gradient(to right, #333 50%, #fff 50%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Sistema</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group" style="margin-top: 30px;">
+                                <label>Esquema de Cores</label>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 15px; margin-top: 15px;">
+                                    <div style="border: 2px solid var(--primary-color); border-radius: 10px; overflow: hidden; cursor: pointer; text-align: center; padding: 15px;">
+                                        <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #4a47a3, #00c9a7); margin: 0 auto 10px;"></div>
+                                        <span style="font-weight: 500;">Padrão</span>
+                                    </div>
+                                    
+                                    <div style="border: 2px solid var(--border-color); border-radius: 10px; overflow: hidden; cursor: pointer; text-align: center; padding: 15px;">
+                                        <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #3498db, #2ecc71); margin: 0 auto 10px;"></div>
+                                        <span style="font-weight: 500;">Oceano</span>
+                                    </div>
+                                    
+                                    <div style="border: 2px solid var(--border-color); border-radius: 10px; overflow: hidden; cursor: pointer; text-align: center; padding: 15px;">
+                                        <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #e74c3c, #f39c12); margin: 0 auto 10px;"></div>
+                                        <span style="font-weight: 500;">Fogo</span>
+                                    </div>
+                                    
+                                    <div style="border: 2px solid var(--border-color); border-radius: 10px; overflow: hidden; cursor: pointer; text-align: center; padding: 15px;">
+                                        <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #9b59b6, #3498db); margin: 0 auto 10px;"></div>
+                                        <span style="font-weight: 500;">Lavanda</span>
+                                    </div>
+                                    
+                                    <div style="border: 2px solid var(--border-color); border-radius: 10px; overflow: hidden; cursor: pointer; text-align: center; padding: 15px;">
+                                        <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #1abc9c, #3498db); margin: 0 auto 10px;"></div>
+                                        <span style="font-weight: 500;">Menta</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group" style="margin-top: 30px;">
+                                <label>Tamanho da Fonte</label>
+                                <div style="display: flex; align-items: center; gap: 15px; margin-top: 15px;">
+                                    <span style="font-size: 0.8rem;">A</span>
+                                    <input type="range" min="1" max="5" value="3" class="form-control" style="flex: 1;">
+                                    <span style="font-size: 1.2rem;">A</span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group" style="margin-top: 30px;">
+                                <label>Layout do Dashboard</label>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; margin-top: 15px;">
+                                    <div style="border: 2px solid var(--primary-color); border-radius: 10px; overflow: hidden; cursor: pointer;">
+                                        <div style="height: 100px; background-color: var(--card-color); display: flex; flex-direction: column; padding: 10px;">
+                                            <div style="width: 100%; height: 20px; background-color: var(--border-color); border-radius: 3px; margin-bottom: 10px;"></div>
+                                            <div style="display: flex; gap: 5px; flex: 1;">
+                                                <div style="flex: 1; background-color: var(--border-color); border-radius: 3px;"></div>
+                                                <div style="flex: 1; background-color: var(--border-color); border-radius: 3px;"></div>
+                                            </div>
+                                        </div>
+                                        <div style="padding: 10px; text-align: center; background-color: var(--background-color);">
+                                            <span style="font-weight: 500;">Padrão</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div style="border: 2px solid var(--border-color); border-radius: 10px; overflow: hidden; cursor: pointer;">
+                                        <div style="height: 100px; background-color: var(--card-color); display: flex; padding: 10px;">
+                                            <div style="width: 30%; height: 100%; background-color: var(--border-color); border-radius: 3px; margin-right: 10px;"></div>
+                                            <div style="flex: 1; display: flex; flex-direction: column; gap: 5px;">
+                                                <div style="flex: 1; background-color: var(--border-color); border-radius: 3px;"></div>
+                                                <div style="flex: 1; background-color: var(--border-color); border-radius: 3px;"></div>
+                                            </div>
+                                        </div>
+                                        <div style="padding: 10px; text-align: center; background-color: var(--background-color);">
+                                            <span style="font-weight: 500;">Compacto</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div style="border: 2px solid var(--border-color); border-radius: 10px; overflow: hidden; cursor: pointer;">
+                                        <div style="height: 100px; background-color: var(--card-color); display: flex; flex-direction: column; padding: 10px;">
+                                            <div style="width: 100%; height: 20px; background-color: var(--border-color); border-radius: 3px; margin-bottom: 10px;"></div>
+                                            <div style="display: flex; gap: 5px; flex: 1;">
+                                                <div style="flex: 2; background-color: var(--border-color); border-radius: 3px;"></div>
+                                                <div style="flex: 1; background-color: var(--border-color); border-radius: 3px;"></div>
+                                            </div>
+                                        </div>
+                                        <div style="padding: 10px; text-align: center; background-color: var(--background-color);">
+                                            <span style="font-weight: 500;">Foco em Dados</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group" style="margin-top: 30px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <label>Animações</label>
+                                    <label class="switch">
+                                        <input type="checkbox" checked>
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                                <p style="color: var(--light-text); margin-top: 5px; font-size: 0.9rem;">Ativar animações na interface (contagem de números, transições, etc.)</p>
+                            </div>
+                            
+                            <div class="form-group" style="margin-top: 20px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <label>Modo de Alto Contraste</label>
+                                    <label class="switch">
+                                        <input type="checkbox">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                                <p style="color: var(--light-text); margin-top: 5px; font-size: 0.9rem;">Aumenta o contraste para melhor acessibilidade visual</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

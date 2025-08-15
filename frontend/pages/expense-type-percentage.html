@@ -75,7 +75,12 @@
                 options: {
                     responsive: true,
                     plugins: {
-                        legend: { position: 'top' },
+                        legend: { 
+                            position: 'top',
+                            labels: {
+                                color: getComputedStyle(document.documentElement).getPropertyValue('--text-color')
+                            }
+                        },
                         tooltip: {
                             callbacks: {
                                 label: function(context) {

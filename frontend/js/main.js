@@ -1,3 +1,35 @@
+// Função para obter configurações de cores dos gráficos baseadas no tema atual
+function getChartThemeConfig() {
+    const textColor = getComputedStyle(document.documentElement).getPropertyValue('--text-color');
+    const borderColor = getComputedStyle(document.documentElement).getPropertyValue('--border-color');
+    
+    return {
+        legend: {
+            labels: {
+                color: textColor
+            }
+        },
+        scales: {
+            y: {
+                ticks: {
+                    color: textColor
+                },
+                grid: {
+                    color: borderColor
+                }
+            },
+            x: {
+                ticks: {
+                    color: textColor
+                },
+                grid: {
+                    color: borderColor
+                }
+            }
+        }
+    };
+}
+
 // Funções utilitárias para o mockup
 document.addEventListener('DOMContentLoaded', function() {
   // Inicializar tema
@@ -127,6 +159,55 @@ function toggleTheme() {
     themeToggle.innerHTML = newTheme === 'dark' 
       ? '<i class="fas fa-sun"></i>' 
       : '<i class="fas fa-moon"></i>';
+  }
+  
+  // Atualizar cores dos gráficos existentes
+  updateChartColors();
+}
+
+// Função para atualizar as cores dos gráficos quando o tema mudar
+function updateChartColors() {
+  const textColor = getComputedStyle(document.documentElement).getPropertyValue('--text-color');
+  const borderColor = getComputedStyle(document.documentElement).getPropertyValue('--border-color');
+  
+  // Atualizar todos os gráficos Chart.js existentes
+  if (window.Chart && window.Chart.instances) {
+    Object.values(window.Chart.instances).forEach(chart => {
+      // Atualizar cores das legendas
+      if (chart.options.plugins && chart.options.plugins.legend) {
+        chart.options.plugins.legend.labels = {
+          ...chart.options.plugins.legend.labels,
+          color: textColor
+        };
+      }
+      
+      // Atualizar cores dos eixos
+      if (chart.options.scales) {
+        if (chart.options.scales.y) {
+          chart.options.scales.y.ticks = {
+            ...chart.options.scales.y.ticks,
+            color: textColor
+          };
+          chart.options.scales.y.grid = {
+            ...chart.options.scales.y.grid,
+            color: borderColor
+          };
+        }
+        if (chart.options.scales.x) {
+          chart.options.scales.x.ticks = {
+            ...chart.options.scales.x.ticks,
+            color: textColor
+          };
+          chart.options.scales.x.grid = {
+            ...chart.options.scales.x.grid,
+            color: borderColor
+          };
+        }
+      }
+      
+      // Redesenhar o gráfico
+      chart.update();
+    });
   }
 }
 
@@ -495,7 +576,19 @@ window.carregarGraficoFluxoCaixaGlobal = async function(canvasId, anoSelecionado
                         ticks: {
                             callback: function(value) {
                                 return 'R$ ' + value.toLocaleString('pt-BR');
-                            }
+                            },
+                            color: getComputedStyle(document.documentElement).getPropertyValue('--text-color')
+                        },
+                        grid: {
+                            color: getComputedStyle(document.documentElement).getPropertyValue('--border-color')
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: getComputedStyle(document.documentElement).getPropertyValue('--text-color')
+                        },
+                        grid: {
+                            color: getComputedStyle(document.documentElement).getPropertyValue('--border-color')
                         }
                     }
                 }
@@ -573,7 +666,12 @@ window.carregarGraficoBreakEven = async function(canvasId) {
             options: {
                 responsive: true,
                 plugins: {
-                    legend: { position: 'top' },
+                    legend: { 
+                        position: 'top',
+                        labels: {
+                            color: getComputedStyle(document.documentElement).getPropertyValue('--text-color')
+                        }
+                    },
                     tooltip: {
                         callbacks: {
                             label: function(context) {
@@ -591,16 +689,25 @@ window.carregarGraficoBreakEven = async function(canvasId) {
                         ticks: {
                             callback: function(value) {
                                 return 'R$ ' + value.toLocaleString('pt-BR');
-                            }
+                            },
+                            color: getComputedStyle(document.documentElement).getPropertyValue('--text-color')
+                        },
+                        grid: {
+                            color: getComputedStyle(document.documentElement).getPropertyValue('--border-color')
                         }
                     },
                     x: {
                         title: {
                             display: true,
-                            text: 'Unidades Vendidas'
+                            text: 'Unidades Vendidas',
+                            color: getComputedStyle(document.documentElement).getPropertyValue('--text-color')
                         },
                         ticks: {
-                            callback: function() { return ''; }
+                            callback: function() { return ''; },
+                            color: getComputedStyle(document.documentElement).getPropertyValue('--text-color')
+                        },
+                        grid: {
+                            color: getComputedStyle(document.documentElement).getPropertyValue('--border-color')
                         }
                     }
                 }

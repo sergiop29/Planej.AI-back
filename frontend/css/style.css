@@ -25,7 +25,7 @@
   --accent-color: #ff9f43;
   --warning-color: #ff6b6b;
   --success-color: #1dd1a1;
-  --text-color: #f5f6fa;
+  --text-color: #ffffff;
   --light-text: #a4b0be;
   --background-color: #1e272e;
   --card-color: #2d3436;
@@ -51,6 +51,10 @@ body {
   font-size: 16px;
   line-height: 1.6;
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 .container {
@@ -559,7 +563,7 @@ header {
 }
 
 .chart-container {
-  height: 380px;
+  height: 270px;
   margin-bottom: 20px;
   padding: 0;
   transition: opacity 0.3s ease;

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil | Planej.AI</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" href="../img/favicon.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="../img/logo.png" alt="Planej.AI Logo">
+                <h1>Planej.AI</h1>
+            </div>
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav class="nav-links">
+                <a href="dashboard.html">Painel</a>
+                <a href="financial-data.html">Dados</a>
+                <a href="agent-chat.html">Agente</a>
+            </nav>
+            <div class="user-actions">
+                <div class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </div>
+                <div class="user-profile">
+                    <img src="../img/avatar.png" alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%;">
+                    <span>Olá, João</span>
+                    <i class="fas fa-chevron-down" style="font-size: 0.8rem; margin-left: 5px;"></i>
+                    
+                    <!-- Dropdown Menu -->
+                    <div class="profile-dropdown">
+                        <ul>
+                            <li><a href="profile.html" class="active"><i class="fas fa-user"></i> Meu Perfil</a></li>
+                            <li><a href="settings.html"><i class="fas fa-cog"></i> Configurações</a></li>
+                            <li><a href="subscription.html"><i class="fas fa-credit-card"></i> Assinatura</a></li>
+                            <li><a href="help.html"><i class="fas fa-question-circle"></i> Ajuda</a></li>
+                            <li><a href="../index.html"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Profile Section -->
+    <section class="dashboard">
+        <div class="container">
+            <div class="dashboard-header">
+                <div class="dashboard-title">
+                    <h2>Meu Perfil</h2>
+                    <p>Gerencie suas informações pessoais e preferências</p>
+                </div>
+                <div class="dashboard-actions">
+                    <button class="btn btn-primary">Salvar Alterações</button>
+                </div>
+            </div>
+
+            <div style="display: flex; flex-wrap: wrap; gap: 30px; margin-bottom: 30px;">
+                <!-- Profile Info -->
+                <div style="flex: 1; min-width: 300px;">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Informações Pessoais</div>
+                        </div>
+                        <div class="card-body">
+                            <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 30px;">
+                                <div style="position: relative; margin-bottom: 20px;">
+                                    <img src="../img/avatar.png" alt="Avatar" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 4px solid var(--primary-color);">
+                                    <div style="position: absolute; bottom: 0; right: 0; background-color: var(--primary-color); color: white; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                                        <i class="fas fa-camera"></i>
+                                    </div>
+                                </div>
+                                <h3 style="margin-bottom: 5px;">João Silva</h3>
+                                <p style="color: var(--light-text); margin-bottom: 5px;">Proprietário de Negócio</p>
+                                <p style="color: var(--light-text);">Membro desde Abril 2025</p>
+                            </div>
+
+                            <form>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                                    <div class="form-group">
+                                        <label for="firstName">Nome</label>
+                                        <input type="text" id="firstName" class="form-control" value="João">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="lastName">Sobrenome</label>
+                                        <input type="text" id="lastName" class="form-control" value="Silva">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">E-mail</label>
+                                    <input type="email" id="email" class="form-control" value="joao.silva@exemplo.com">
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Telefone</label>
+                                    <input type="tel" id="phone" class="form-control" value="(11) 98765-4321">
+                                </div>
+                                <div class="form-group">
+                                    <label for="position">Cargo</label>
+                                    <input type="text" id="position" class="form-control" value="Proprietário de Negócio">
+                                </div>
+                                <div class="form-group">
+                                    <label for="company">Empresa</label>
+                                    <input type="text" id="company" class="form-control" value="Silva & Associados">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security and Preferences -->
+                <div style="flex: 1; min-width: 300px;">
+                    <div class="card" style="margin-bottom: 30px;">
+                        <div class="card-header">
+                            <div class="card-title">Segurança</div>
+                        </div>
+                        <div class="card-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="currentPassword">Senha Atual</label>
+                                    <div style="position: relative;">
+                                        <input type="password" id="currentPassword" class="form-control" placeholder="••••••••">
+                                        <span class="password-toggle" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+                                            <i class="fas fa-eye"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="newPassword">Nova Senha</label>
+                                    <div style="position: relative;">
+                                        <input type="password" id="newPassword" class="form-control" placeholder="••••••••">
+                                        <span class="password-toggle" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+                                            <i class="fas fa-eye"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="confirmPassword">Confirmar Nova Senha</label>
+                                    <div style="position: relative;">
+                                        <input type="password" id="confirmPassword" class="form-control" placeholder="••••••••">
+                                        <span class="password-toggle" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+                                            <i class="fas fa-eye"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <button class="btn btn-outline" style="width: 100%;">Alterar Senha</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Preferências</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>Tema</label>
+                                <div style="display: flex; gap: 10px; margin-top: 10px;">
+                                    <button class="btn btn-outline active" style="flex: 1;">Claro</button>
+                                    <button class="btn btn-outline" style="flex: 1;">Escuro</button>
+                                    <button class="btn btn-outline" style="flex: 1;">Sistema</button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Idioma</label>
+                                <select class="form-control">
+                                    <option selected>Português (Brasil)</option>
+                                    <option>English (US)</option>
+                                    <option>Español</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Notificações</label>
+                                <div style="margin-top: 10px;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                                        <span>E-mail</span>
+                                        <label class="switch">
+                                            <input type="checkbox" checked>
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                                        <span>Alertas de Fluxo de Caixa</span>
+                                        <label class="switch">
+                                            <input type="checkbox" checked>
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                                        <span>Relatórios Semanais</span>
+                                        <label class="switch">
+                                            <input type="checkbox" checked>
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <span>Dicas do Assistente IA</span>
+                                        <label class="switch">
+                                            <input type="checkbox" checked>
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Connected Accounts -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Contas Conectadas</div>
+                </div>
+                <div class="card-body">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                        <div style="display: flex; align-items: center; justify-content: space-between; padding: 15px; border: 1px solid var(--border-color); border-radius: 10px;">
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <div style="width: 40px; height: 40px; background-color: #1877F2; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white;">
+                                    <i class="fab fa-google"></i>
+                                </div>
+                                <div>
+                                    <h4 style="margin-bottom: 5px;">Google</h4>
+                                    <p style="color: var(--light-text); font-size: 0.9rem;">Conectado como joao.silva@gmail.com</p>
+                                </div>
+                            </div>
+                            <button class="btn btn-sm btn-outline">Desconectar</button>
+                        </div>
+                        
+                        <div style="display: flex; align-items: center; justify-content: space-between; padding: 15px; border: 1px solid var(--border-color); border-radius: 10px;">
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <div style="width: 40px; height: 40px; background-color: #1DA1F2; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white;">
+                                    <i class="fab fa-facebook-f"></i>
+                                </div>
+                                <div>
+                                    <h4 style="margin-bottom: 5px;">Facebook</h4>
+                                    <p style="color: var(--light-text); font-size: 0.9rem;">Não conectado</p>
+                                </div>
+                            </div>
+                            <button class="btn btn-sm btn-primary">Conectar</button>
+                        </div>
+                        
+                        <div style="display: flex; align-items: center; justify-content: space-between; padding: 15px; border: 1px solid var(--border-color); border-radius: 10px;">
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <div style="width: 40px; height: 40px; background-color: #0A66C2; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white;">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </div>
+                                <div>
+                                    <h4 style="margin-bottom: 5px;">LinkedIn</h4>
+                                    <p style="color: var(--light-text); font-size: 0.9rem;">Não conectado</p>
+                                </div>
+                            </div>
+                            <button class="btn btn-sm btn-primary">Conectar</button>
+                        </div>
+                        
+                        <div style="display: flex; align-items: center; justify-content: space-between; padding: 15px; border: 1px solid var(--border-color); border-radius: 10px;">
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <div style="width: 40px; height: 40px; background-color: #333; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white;">
+                                    <i class="fab fa-apple"></i>
+                                </div>
+                                <div>
+                                    <h4 style="margin-bottom: 5px;">Apple</h4>
+                                    <p style="color: var(--light-text); font-size: 0.9rem;">Não conectado</p>
+                                </div>
+                            </div>
+                            <button class="btn btn-sm btn-primary">Conectar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>
