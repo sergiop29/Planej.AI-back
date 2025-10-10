@@ -11,3 +11,4 @@ langchain-community>=0.0.30
 langchain-openai>=0.0.8
 openai>=1.0.0
 django-cors-headers==4.4.0
+pandas==2.2.2
