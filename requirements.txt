@@ -1,8 +1,12 @@
 Django>=5.2.3
 djangorestframework>=3.16.0
-djangorestframework-simplejwt>=5.5.0
+djangorestframework-simplejwt
+gunicorn
+whitenoise
+python-decouple
+dj-database-url>=5.5.0
 psycopg2-binary>=2.9.10 
 langchain>=0.1.0
 langchain-community>=0.0.30
 langchain-openai>=0.0.8
-openai>=1.0.0 
+openai>=1.0.0

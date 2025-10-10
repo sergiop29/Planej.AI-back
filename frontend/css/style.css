@@ -1,18 +1,18 @@
 /* Variáveis de cores para modo claro */
 :root {
-  --primary-color: #00c9a7;
-  --secondary-color: #4a47a3;
-  --accent-color: #ff9f43;
+  --primary-color: #E64E10;
+  --secondary-color: #5B4B48;
+  --accent-color: #C55A48;
   --warning-color: #ee5253;
   --success-color: #10ac84;
-  --text-color: #2d3436;
+  --text-color: #1c1c1c;
   --light-text: #636e72;
-  --background-color: #f5f6fa;
+  --background-color: #F7EEEB;
   --card-color: #ffffff;
   --border-color: #dfe6e9;
-  --chart-color-1: #4a47a3;
-  --chart-color-2: #00c9a7;
-  --chart-color-3: #ff9f43;
+  --chart-color-1: #5B4B48;
+  --chart-color-2: #E64E10;
+  --chart-color-3: #C55A48;
   --chart-color-4: #ee5253;
   --shadow-color: rgba(0, 0, 0, 0.1);
   --hover-transition: all 0.3s ease;
@@ -20,19 +20,19 @@
 
 /* Variáveis de cores para modo escuro */
 [data-theme="dark"] {
-  --primary-color: #00c9a7;
-  --secondary-color: #6c5ce7;
-  --accent-color: #ff9f43;
+  --primary-color: #E64E10;
+  --secondary-color: #5B4B48;
+  --accent-color: #C55A48;
   --warning-color: #ff6b6b;
   --success-color: #1dd1a1;
-  --text-color: #ffffff;
+  --text-color: #F7EEEB;
   --light-text: #a4b0be;
-  --background-color: #1e272e;
-  --card-color: #2d3436;
-  --border-color: #3d4852;
-  --chart-color-1: #6c5ce7;
-  --chart-color-2: #00c9a7;
-  --chart-color-3: #ff9f43;
+  --background-color: #1c1c1c;
+  --card-color: #000000;
+  --border-color: #5B4B48;
+  --chart-color-1: #5B4B48;
+  --chart-color-2: #E64E10;
+  --chart-color-3: #C55A48;
   --chart-color-4: #ff6b6b;
   --shadow-color: rgba(0, 0, 0, 0.3);
   --blue-color: #4231c4;
