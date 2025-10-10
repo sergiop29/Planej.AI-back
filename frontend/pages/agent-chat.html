@@ -149,7 +149,7 @@ function sendMessageToAgent(message, conversationId = null, isWelcome = false) {
   chatMessages.appendChild(loadingDiv);
   chatMessages.scrollTop = chatMessages.scrollHeight;
 
-  fetch('http://127.0.0.1:8000/users/financial-agent/', {
+  fetch('https://finance.astraflow.io/users/financial-agent/', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ question: message, conversation_id: conversationId })

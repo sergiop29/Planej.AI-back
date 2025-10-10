@@ -538,7 +538,7 @@ function addChatMessage(message, isUser = false, isLoading = false) {
 // Função utilitária global para carregar gráfico de fluxo de caixa
 window.carregarGraficoFluxoCaixaGlobal = async function(canvasId, anoSelecionado) {
     try {
-        const resp = await fetch('http://127.0.0.1:8000/users/cash-flow/');
+        const resp = await fetch('https://finance.astraflow.io/users/cash-flow/');
         const data = await resp.json();
         // Filtrar por ano
         const ano = anoSelecionado || (data.labels.length > 0 ? data.labels[data.labels.length-1].slice(0,4) : '2025');
@@ -603,7 +603,7 @@ window.carregarGraficoFluxoCaixaGlobal = async function(canvasId, anoSelecionado
 window.carregarGraficoBreakEven = async function(canvasId) {
     try {
         // Buscar todas as receitas (vendas) do banco
-        const resp = await fetch('http://127.0.0.1:8000/users/financial-records/');
+        const resp = await fetch('https://finance.astraflow.io/users/financial-records/');
         const data = await resp.json();
         // Filtrar apenas receitas
         const vendas = data.filter(r => r['Tipo'] && r['Tipo'].toLowerCase() === 'receita');
@@ -617,7 +617,7 @@ window.carregarGraficoBreakEven = async function(canvasId) {
             return receitaAcumulada;
         });
         // Buscar custos totais (fixos + variáveis) da API de indicadores financeiros
-        const respIndicadores = await fetch('http://127.0.0.1:8000/users/financial-indicators/');
+        const respIndicadores = await fetch('https://finance.astraflow.io/users/financial-indicators/');
         const indicadores = await respIndicadores.json();
         const custoTotal = indicadores.gastos || 0;
         const custosTotais = unidades.map(() => custoTotal);
@@ -721,7 +721,7 @@ window.carregarGraficoBreakEven = async function(canvasId) {
 async function atualizarIndiceSaudeFinanceira() {
   try {
     // 1. Buscar a nota da IA
-    const respNota = await fetch('http://127.0.0.1:8000/users/nota-saude/', { method: 'GET' });
+    const respNota = await fetch('https://finance.astraflow.io/users/nota-saude/', { method: 'GET' });
     const dataNota = await respNota.json();
     const notaSaude = dataNota.nota;
     document.getElementById('indice-saude-valor').textContent = notaSaude;
@@ -734,14 +734,14 @@ async function atualizarIndiceSaudeFinanceira() {
     }
 
     // 2. Breve texto sobre a situação financeira
-    const respTexto = await fetch('http://127.0.0.1:8000/users/analise-saude/', { method: 'GET' });
+    const respTexto = await fetch('https://finance.astraflow.io/users/analise-saude/', { method: 'GET' });
     const dataTexto = await respTexto.json();
     document.getElementById('indice-saude-analise').textContent = dataTexto.analise || '';
     const loaderAnalise = document.getElementById('loader-indice-saude-analise');
     if (loaderAnalise) loaderAnalise.remove();
 
     // 3. Pontos fortes
-    const respFortes = await fetch('http://127.0.0.1:8000/users/pontos-fortes/', { method: 'GET' });
+    const respFortes = await fetch('https://finance.astraflow.io/users/pontos-fortes/', { method: 'GET' });
     const dataFortes = await respFortes.json();
     if (Array.isArray(dataFortes.pontos_fortes)) {
       document.getElementById('indice-saude-pontos-fortes').innerHTML = dataFortes.pontos_fortes.map(p => `<li style='margin-bottom:5px;'>${p}</li>`).join('');
@@ -750,7 +750,7 @@ async function atualizarIndiceSaudeFinanceira() {
     if (loaderFortes) loaderFortes.remove();
 
     // 4. Pontos fracos
-    const respFracos = await fetch('http://127.0.0.1:8000/users/pontos-fracos/', { method: 'GET' });
+    const respFracos = await fetch('https://finance.astraflow.io/users/pontos-fracos/', { method: 'GET' });
     const dataFracos = await respFracos.json();
     if (Array.isArray(dataFracos.melhorias)) {
       document.getElementById('indice-saude-melhorias').innerHTML = dataFracos.melhorias.map(m => `<li style='margin-bottom:5px;'>${m}</li>`).join('');
