@@ -156,7 +156,7 @@ if(btn && fileInput) {
     formData.append('file', fileInput.files[0]);
     statusSpan.textContent = 'Enviando...';
     try {
-      const resp = await fetch('http://127.0.0.1:8000/users/upload-csv-vectorstore/', {
+      const resp = await fetch('https://finance.astraflow.io/users/upload-csv-vectorstore/', {
         method: 'POST',
         body: formData
       });
@@ -171,7 +171,7 @@ if(btn && fileInput) {
 // Preencher tabela de Relatórios Financeiros com os 6 últimos registros
 async function carregarUltimosRegistros() {
     try {
-        const resp = await fetch('http://127.0.0.1:8000/users/financial-records/');
+        const resp = await fetch('https://finance.astraflow.io/users/financial-records/');
         const data = await resp.json();
         const tbody = document.getElementById('financial-records-tbody');
         tbody.innerHTML = '';
@@ -200,7 +200,7 @@ if(btnExcluirTodos) {
   btnExcluirTodos.addEventListener('click', async function() {
     if (!confirm('Tem certeza que deseja excluir TODOS os dados financeiros? Esta ação não pode ser desfeita.')) return;
     try {
-      const resp = await fetch('http://127.0.0.1:8000/users/financial-records/', {
+      const resp = await fetch('https://finance.astraflow.io/users/financial-records/', {
         method: 'DELETE'
       });
       if (resp.ok) {

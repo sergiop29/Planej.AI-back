@@ -75,7 +75,7 @@
     <script>
     async function carregarIndicadores() {
         try {
-            const resp = await fetch('http://127.0.0.1:8000/users/financial-indicators/');
+            const resp = await fetch('https://finance.astraflow.io/users/financial-indicators/');
             const data = await resp.json();
             document.getElementById('receita').textContent = 'R$ ' + data.receita.toLocaleString('pt-BR', {minimumFractionDigits: 2});
             document.getElementById('gastos').textContent = 'R$ ' + data.gastos.toLocaleString('pt-BR', {minimumFractionDigits: 2});

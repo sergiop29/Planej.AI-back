@@ -262,7 +262,7 @@
     <script>
 async function carregarDashboardIndicadores() {
     try {
-        const resp = await fetch('http://127.0.0.1:8000/users/financial-indicators/');
+        const resp = await fetch('https://finance.astraflow.io/users/financial-indicators/');
         const data = await resp.json();
         document.getElementById('dashboard-receita').textContent = 'R$ ' + data.receita.toLocaleString('pt-BR', {minimumFractionDigits: 2});
         document.getElementById('dashboard-gastos').textContent = 'R$ ' + data.gastos.toLocaleString('pt-BR', {minimumFractionDigits: 2});
@@ -276,7 +276,7 @@ carregarDashboardIndicadores();
   // Gráfico Receitas vs Despesas com dados reais
 async function carregarGraficoReceitasDespesas(anoSelecionado) {
     try {
-        const resp = await fetch('http://127.0.0.1:8000/users/financial-trends/');
+        const resp = await fetch('https://finance.astraflow.io/users/financial-trends/');
         const data = await resp.json();
         // Filtrar por ano
         const ano = anoSelecionado || (data.labels.length > 0 ? data.labels[data.labels.length-1].slice(0,4) : '2025');
@@ -359,7 +359,7 @@ if(selectAno) {
 
 async function carregarGraficoDistribuicaoCategoria() {
     try {
-        const resp = await fetch('http://127.0.0.1:8000/users/expense-type-percentage/');
+        const resp = await fetch('https://finance.astraflow.io/users/expense-type-percentage/');
         const data = await resp.json();
         const labels = Object.keys(data);
         const valores = Object.values(data);

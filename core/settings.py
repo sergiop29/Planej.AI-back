@@ -47,6 +47,9 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    # CorsMiddleware must be placed as high as possible so it can
+    # add the CORS headers before other middleware produce a response.
+    'corsheaders.middleware.CorsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -140,3 +143,9 @@ REST_FRAMEWORK = {
 AUTH_USER_MODEL = 'users.User'
 
 CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', default=[], cast=Csv())
+
+# Whether browsers are allowed to include credentials (cookies, authorization headers)
+# in cross-origin requests. If you need to send cookies or Authorization headers, set
+# the environment variable CORS_ALLOW_CREDENTIALS=True in production and make sure
+# CORS_ALLOWED_ORIGINS contains the exact origin(s) (can't be '*').
+CORS_ALLOW_CREDENTIALS = config('CORS_ALLOW_CREDENTIALS', default=False, cast=bool)

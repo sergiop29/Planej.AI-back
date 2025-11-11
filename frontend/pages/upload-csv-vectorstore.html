@@ -25,7 +25,7 @@
             const resultado = document.getElementById('resultado');
             resultado.textContent = 'Enviando...';
             try {
-                const resp = await fetch('http://127.0.0.1:8000/users/upload-csv-vectorstore/', {
+                const resp = await fetch('https://finance.astraflow.io/users/upload-csv-vectorstore/', {
                     method: 'POST',
                     body: formData
                 });

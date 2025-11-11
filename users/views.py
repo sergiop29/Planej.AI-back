@@ -20,7 +20,7 @@ from langchain.memory import ConversationBufferMemory
 import uuid
 from langchain.chains import ConversationChain
 from langchain_community.vectorstores import FAISS
-from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain_community.embeddings import OpenAIEmbeddings
 import pickle
 from django.db.models import Q
 from django.db.models.functions import TruncMonth

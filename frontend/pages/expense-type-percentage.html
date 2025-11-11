@@ -48,7 +48,7 @@
     <script>
     async function carregarGraficoTipoGasto() {
         try {
-            const resp = await fetch('http://127.0.0.1:8000/users/expense-type-percentage/');
+            const resp = await fetch('https://finance.astraflow.io/users/expense-type-percentage/');
             const data = await resp.json();
             const labels = Object.keys(data);
             const valores = Object.values(data);
