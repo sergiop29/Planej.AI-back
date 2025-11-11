@@ -9,18 +9,14 @@ from rest_framework.permissions import AllowAny
 from rest_framework.parsers import MultiPartParser, FormParser
 import pandas as pd
 
-# Dependências para Langchain
-from langchain_community.llms import OpenAI
-# Note: Removed deprecated/absent imports from langchain.agents (initialize_agent, Tool)
-# to avoid ImportError with newer langchain versions. Removed PromptTemplate import (unused) to fix ModuleNotFoundError in current langchain version.
+# Dependências para LLM e embeddings (usar provedores atuais do ecossistema LangChain)
+from langchain_openai import OpenAI, OpenAIEmbeddings
+# Vectorstore FAISS permanece na comunidade
+from langchain_community.vectorstores import FAISS
 import os
 from dotenv import load_dotenv
 load_dotenv()
-from langchain.memory import ConversationBufferMemory
 import uuid
-from langchain.chains import ConversationChain
-from langchain_community.vectorstores import FAISS
-from langchain_community.embeddings import OpenAIEmbeddings
 import pickle
 from django.db.models import Q
 from django.db.models.functions import TruncMonth
@@ -53,12 +49,12 @@ class FinancialAgentView(APIView):
 
         # Buscar histórico de mensagens
         messages = Message.objects.filter(conversation=conversation).order_by('timestamp')
-        memory = ConversationBufferMemory(return_messages=True)
+        # Montar histórico simples no prompt (evita dependência de langchain.memory)
+        history_lines = []
         for msg in messages:
-            if msg.sender == 'user':
-                memory.chat_memory.add_user_message(msg.text)
-            else:
-                memory.chat_memory.add_ai_message(msg.text)
+            role = 'Usuário' if msg.sender == 'user' else 'Assistente'
+            history_lines.append(f"{role}: {msg.text}")
+        history_text = "\n".join(history_lines)
 
         # Configurar chave da OpenAI
         openai_api_key = os.getenv('OPENAI_API_KEY', 'SUA_CHAVE_AQUI')
@@ -70,7 +66,6 @@ class FinancialAgentView(APIView):
         if os.path.exists(vectorstore_path):
             with open(vectorstore_path, 'rb') as f:
                 vectorstore = pickle.load(f)
-            embeddings = OpenAIEmbeddings(openai_api_key=openai_api_key)
             docs = vectorstore.similarity_search(question, k=3)
             contextos_relevantes = [doc.page_content for doc in docs]
         # Montar contexto para o prompt
@@ -84,11 +79,14 @@ class FinancialAgentView(APIView):
             "Seja amigável, didática e detalhada nas explicações, ajudando o usuário a realmente compreender cada resposta. "
             + (f"\nContexto financeiro do usuário: {contexto_rag}" if contexto_rag else "")
         )
-        # Usar ConversationChain para manter memória
-        chain = ConversationChain(llm=llm, memory=memory, verbose=False)
-        # Adiciona o prompt do sistema antes da pergunta do usuário
+        # Montar prompt contendo o sistema, histórico e a nova pergunta
+        full_prompt = (
+            f"{system_prompt}\n\n" +
+            (f"Histórico da conversa:\n{history_text}\n\n" if history_text else "") +
+            f"Pergunta: {question}\nResposta:"
+        )
         try:
-            resposta = chain.predict(input=f"{system_prompt} Pergunta: {question}")
+            resposta = llm.predict(full_prompt)
         except Exception as e:
             resposta = "Desculpe, houve um erro ao consultar o agente de IA. Verifique sua chave de API ou tente novamente mais tarde."
 
