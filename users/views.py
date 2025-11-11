@@ -11,7 +11,8 @@ import pandas as pd
 
 # Dependências para Langchain
 from langchain_community.llms import OpenAI
-from langchain.agents import initialize_agent, Tool
+# Note: Removed deprecated/absent imports from langchain.agents (initialize_agent, Tool)
+# to avoid ImportError with newer langchain versions.
 from langchain.prompts import PromptTemplate
 import os
 from dotenv import load_dotenv
